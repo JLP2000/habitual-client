@@ -112,6 +112,8 @@ const data = [
 ]
 
 const container = document.querySelector(".container")
+const editButton = document.querySelector("#editHabit")
+const deleteButton = document.querySelector("#deleteHabit")
 
 async function loadHabits() {
 	const options = {
@@ -170,35 +172,63 @@ function updateContent(e) {
 }
 
 function renderMenuContent(habit) {
-	const menu = document.querySelector(".menu")
-	while (menu.firstChild) {
-		menu.removeChild(menu.lastChild)
-	}
+	document.querySelector(".menu-placeholder").style.display = "none"
+	editButton.style.display = "inline-block"
+	deleteButton.style.display = "inline-block"
+	document.querySelector(".menu-content").style.display = "flex"
 
-	const header = document.createElement("h2")
+	const infoEls = document.querySelectorAll(".menu-info")
+	infoEls.forEach((el) => el.classList.add("menu-info-show"))
+
+	const header = document.querySelector(".menu-name")
 	header.className = "menu-name"
 	header.textContent = habit.name
-	menu.appendChild(header)
 
-	const start = document.createElement("p")
+	const start = document.querySelector(".menu-start")
 	start.className = "menu-start"
 	start.textContent = habit.start_date
-	menu.appendChild(start)
 
-	const end = document.createElement("p")
+	const end = document.querySelector(".menu-end")
 	end.className = "menu-end"
 	end.textContent = habit.end_date
-	menu.appendChild(end)
 
-	const note = document.createElement("p")
+	const interval = document.querySelector(".menu-interval")
+	interval.className = "menu-interval"
+	interval.textContent = formatInterval(
+		habit.interval_in_days,
+		habit.interval_in_months
+	)
+
+	const note = document.querySelector(".menu-note")
 	note.className = "menu-note"
 	note.textContent = habit.note
-	menu.appendChild(note)
 
-	const colour = document.createElement("div")
+	const colour = document.querySelector(".menu-colour")
 	colour.className = "menu-colour"
 	colour.textContent = habit.colour
-	menu.appendChild(colour)
+}
+
+function onEditHabit(e) {
+	console.log("edit")
+}
+
+function onDeleteHabit(e) {
+	console.log("delete")
+}
+
+editButton.addEventListener("click", onEditHabit)
+deleteButton.addEventListener("click", onDeleteHabit)
+
+function formatInterval(days, months) {
+	if (days) {
+		if (days == 1) return "Daily"
+		if (days % 7 === 0) return "Weekly"
+		return `Every ${days} days`
+	}
+	if (months) {
+		if (months == 1) return "Monthly"
+		return `Every ${months} months`
+	}
 }
 
 function loadMockData() {
