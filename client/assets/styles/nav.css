@@ -9,6 +9,11 @@
 	font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 	color: var(--white-color);
 }
+
+a {
+	text-decoration: none;
+}
+
 body {
 	position: relative;
 	display: grid;
@@ -124,6 +129,11 @@ img {
 	color: var(--white-color);
 	background-color: #384152;
 	transition: 0.5s ease;
+}
+
+[data-selected="true"] > li {
+	color: var(--white-color);
+	background-color: #384152;
 }
 
 .features-item-text,
