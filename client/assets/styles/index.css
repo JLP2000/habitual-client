@@ -30,8 +30,7 @@ button {
 	float: right;
 	cursor: pointer;
 }
-button:focus {
-}
+
 .list {
 	border-radius: 20px;
 	border: 2px solid white;
@@ -48,6 +47,7 @@ h4 {
 	user-select: none;
 	-webkit-tap-highlight-color: transparent;
 	cursor: pointer;
+	margin-left: 16px;
 }
 
 .checkbox span {

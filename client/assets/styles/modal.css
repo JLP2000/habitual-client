@@ -1,0 +1,92 @@
+/* The Modal (background) */
+:root {
+	--white-color: #fafafb;
+	--background-color: #111828;
+	--grey-color: #b5b5be;
+	--purple: #8758ff;
+	--navwidth: 12rem;
+}
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	z-index: 10;
+}
+
+/* Modal Content/Box */
+.modal-content {
+	background-color: var(--background-color);
+	margin: 15% auto;
+	padding: 2rem 4rem;
+	border: 2px solid var(--grey-color);
+	border-radius: 5px;
+	width: 60%;
+	z-index: 10;
+}
+
+h2 {
+	font-size: 1.5rem;
+}
+
+/* The Close Button */
+.close {
+	color: var(--grey-color);
+	float: right;
+	font-size: 40px;
+}
+
+.close:hover,
+.close:focus {
+	color: var(--purple);
+	text-decoration: none;
+	cursor: pointer;
+}
+
+form * {
+	display: inline-block;
+	padding: 5px;
+}
+
+.forminput {
+	margin: 3px;
+	width: 80%;
+}
+
+.modal-content input,
+.modal-content select {
+	background-color: black;
+	border: 1px solid var(--white-color);
+	color: var(--white-color);
+	border-radius: 5px;
+}
+
+#name {
+	width: 60%;
+}
+
+#frequency {
+	width: 12%;
+}
+
+#timeframe {
+	margin: 0px, 5px;
+}
+
+#start_dt,
+#end_dt {
+	width: 25%;
+}
+
+#submitNew {
+	background-color: var(--purple);
+	padding: 5px;
+	margin-left: 87%;
+	font-size: 18px;
+}
