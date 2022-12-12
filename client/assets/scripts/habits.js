@@ -111,32 +111,27 @@ const data = [
 	},
 ]
 
-const container = document.querySelector(".container")
+const habitsContainer = document.querySelector(".habits-container")
 const editButton = document.querySelector("#editHabit")
 const deleteButton = document.querySelector("#deleteHabit")
 
 async function loadHabits() {
-	const options = {
-		headers: {
-			Authorization: localStorage.getItem("session"),
-		},
-	}
-	const response = await fetch("http://localhost:3000/posts", options)
-	const posts = await response.json()
-
-	if (response.status === 401) {
-		window.location.assign("login.html")
-	} else {
-		const container = document.getElementById("posts")
-
-		posts.forEach((p) => {
-			const elem = createPostElement(p)
-			container.appendChild(elem)
+	getAllHabits()
+		.then((data) => console.log(data))
+		.catch((err) => {
+			if (err.status === 401) {
+				window.location.assign("login.html")
+			}
 		})
-	}
 }
 
-async function loadHabitById(id) {}
+async function loadHabitById(id) {
+	getHabitById(id)
+		.then((data) => console.log(data))
+		.catch((err) => {
+			console.warn(JSON.stringify(err))
+		})
+}
 
 function createHabitElement(data) {
 	const habitLink = document.createElement("a")
@@ -152,7 +147,7 @@ function createHabitElement(data) {
 
 	const note = document.createElement("p")
 	note.className = "habit-note"
-	note.textContent = data.note
+	note.textContent = formatNote(data.note)
 	habit.appendChild(note)
 
 	habit.style.backgroundColor = data.colour
@@ -231,11 +226,17 @@ function formatInterval(days, months) {
 	}
 }
 
+function formatNote(note = "") {
+	if (note.length > 50) return `${note.substring(0, 50)}...`
+	else return note
+}
+
 function loadMockData() {
-	data.forEach((habit) => {
+	data.slice(0, 6).forEach((habit) => {
 		const habitEl = createHabitElement(habit)
-		container.appendChild(habitEl)
+		habitsContainer.appendChild(habitEl)
 	})
 }
 
 loadMockData()
+loadHabits()
