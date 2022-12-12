@@ -6,7 +6,7 @@
 	--navwidth: 12rem;
 }
 * {
-	font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+	font-family: "Trebuchet MS", sans-serif;
 	color: var(--white-color);
 }
 
@@ -42,15 +42,14 @@ body {
 	display: flex;
 	font-size: 1.2rem;
 }
-.logo-name {
+#logoicon {
 	justify-content: center;
 	align-items: center;
 	display: flex;
-	width: 3rem;
+	width: 2.75rem;
 	height: 3rem;
 	color: lightgray;
 	border-radius: 3px;
-	border: 1px solid lightgrey;
 }
 .logo-name__name {
 	margin-left: 0.9rem;
@@ -63,7 +62,7 @@ body {
 	opacity: 0.5;
 	margin-top: 0.75rem;
 }
-img {
+.navicon {
 	width: 2rem;
 	height: 2rem;
 	filter: invert(95%) sepia(3%) saturate(4459%) hue-rotate(287deg)
@@ -210,11 +209,12 @@ img {
 }
 
 .main {
-	width: 79vh;
+	width: 77%;
 	margin: 2rem 2rem 2rem 16rem;
 	font-size: 1.25rem;
 }
 
 .main.collapse {
+	width: 85%;
 	margin: 2rem 2rem 2rem 8rem;
 }
