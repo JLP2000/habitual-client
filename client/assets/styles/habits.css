@@ -1,19 +1,75 @@
 .habits-grid {
 	display: grid;
 	grid-template-columns: 1fr 30%;
+	grid-template-rows: 1fr;
 }
 
 .container {
+	max-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.new-habit {
+	align-self: center;
+}
+
+.new-habit > button {
+	margin-top: 0.45rem;
+	background-color: var(--purple);
+	border: none;
+	border-radius: 5px;
+	font-size: 1.25rem;
+	font-weight: bold;
+	padding: 0.3rem 0.55rem;
+	display: block;
+	float: right;
+	cursor: pointer;
+}
+
+.habits-container {
+	overflow: hidden;
+}
+
+.pagination {
+	display: inline-block;
+}
+
+.pagination a {
+	color: white;
+	float: left;
+	padding: 8px 16px;
+	text-decoration: none;
+}
+
+.pagination a.active {
+	background-color: #4caf50;
+	color: white;
+	border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+	background-color: #ddd;
+	border-radius: 5px;
 }
 
 .menu {
 	border: 1px solid white;
 	border-radius: 5px;
-	padding: 2rem;
-	margin: 1rem;
-	position: sticky;
+	padding: 2rem 2rem 0px 2rem;
+	margin: 0px 1rem;
 	top: 20px;
 	height: 80vh;
+}
+
+.menu-name,
+.menu-start,
+.menu-end,
+.menu-interval,
+.menu-note,
+.menu-colour {
+	font-size: 1rem;
 }
 
 .menu-actions > button {
