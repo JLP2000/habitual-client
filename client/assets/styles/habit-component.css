@@ -1,0 +1,16 @@
+.habit-container {
+	border-width: 1px;
+	border-color: aliceblue;
+	border-style: solid;
+	border-radius: 5px;
+	margin: 1rem 0px;
+	padding: 0.5rem;
+}
+
+.habit-name {
+	font-size: 1.5rem;
+}
+
+.habit-note {
+	font-size: 1rem;
+}
