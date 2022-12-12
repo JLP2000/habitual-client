@@ -1,0 +1,21 @@
+main {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#login-form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+input[type="text"],
+input[type="password"] {
+	display: inline-block;
+}
+
+input-text:focus {
+}
