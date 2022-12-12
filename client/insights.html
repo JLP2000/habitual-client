@@ -8,83 +8,86 @@
 		<script defer src="assets/scripts/nav.js"></script>
 		<title>Habitual | Insights</title>
 	</head>
-	<body class="grid">
-		<div class="side-bar" style="display: flex; flex-direction: column">
-			<div class="logo-name-wrapper">
-				<img id="logoicon" src="assets/images/logoicon.png" alt="" />
+	<body>
+		<div class="layout">
+			<div class="side-bar" style="display: flex; flex-direction: column">
+				<div class="logo-name-wrapper">
+					<img id="logoicon" src="assets/images/logoicon.png" alt="" />
+					<h2 id="brandname">Habitual</h2>
+				</div>
+				<div class="separator"></div>
+				<ul class="features-list">
+					<a href="index.html" data-selected="false">
+						<li class="features-item home active">
+							<img src="assets/images/home.svg" alt="home" class="navicon" />
+							<span class="features-item-text">Home</span>
+							<span class="tooltip">Home</span>
+						</li>
+					</a>
+					<a href="habits.html" data-selected="false">
+						<li class="features-item draft">
+							<img src="assets/images/all.svg" alt="all" class="navicon" />
+							<span class="features-item-text">All</span>
+							<span class="tooltip">All</span>
+						</li>
+					</a>
+					<a href="#" data-selected="true">
+						<li class="features-item star">
+							<img
+								src="assets/images/insights.svg"
+								alt="insights"
+								class="navicon"
+							/>
+							<span class="features-item-text">Insights</span>
+							<span class="tooltip">Insights</span>
+						</li>
+					</a>
+				</ul>
+				<div class="separator"></div>
+				<ul class="category-list">
+					<div class="category-header">Categories</div>
+					<li class="category-item">
+						<span
+							class="category-item-status"
+							style="background-color: #79d861"
+						></span>
+						<span class="category-item-text">Cat 1</span>
+						<span class="tooltip">Cat 1</span>
+					</li>
+					<li class="category-item">
+						<span
+							class="category-item-status"
+							style="background-color: #c43c5d"
+						></span>
+						<span class="category-item-text">Cat 2</span>
+						<span class="tooltip">Cat 2</span>
+					</li>
+					<li class="category-item">
+						<span
+							class="category-item-status"
+							style="background-color: #ff5050"
+						></span
+						><span class="category-item-text">Cat 3</span>
+						<span class="tooltip">Cat 3</span>
+					</li>
+					<li class="category-item">
+						<span
+							class="category-item-status"
+							style="background-color: #42ffdd"
+						></span>
+						<span class="category-item-text">Cat 4</span>
+						<span class="tooltip">Cat 4</span>
+					</li>
+				</ul>
+				<a href="login.html" class="account-item">
+					<img src="assets/images/logout.svg" alt="Logout" class="navicon" />
+					<span class="features-item-text">Logout</span>
+					<span class="tooltip">Logout</span>
+				</a>
 			</div>
-			<div class="separator"></div>
-			<ul class="features-list">
-				<a href="index.html" data-selected="false">
-					<li class="features-item home active">
-						<img src="assets/images/home.svg" alt="home" class="navicon" />
-						<span class="features-item-text">Home</span>
-						<span class="tooltip">Home</span>
-					</li>
-				</a>
-				<a href="habits.html" data-selected="false">
-					<li class="features-item draft">
-						<img src="assets/images/all.svg" alt="all" class="navicon" />
-						<span class="features-item-text">All</span>
-						<span class="tooltip">All</span>
-					</li>
-				</a>
-				<a href="#" data-selected="true">
-					<li class="features-item star">
-						<img
-							src="assets/images/insights.svg"
-							alt="insights"
-							class="navicon"
-						/>
-						<span class="features-item-text">Insights</span>
-						<span class="tooltip">Insights</span>
-					</li>
-				</a>
-			</ul>
-			<div class="separator"></div>
-			<ul class="category-list">
-				<div class="category-header">Categories</div>
-				<li class="category-item">
-					<span
-						class="category-item-status"
-						style="background-color: #79d861"
-					></span>
-					<span class="category-item-text">Cat 1</span>
-					<span class="tooltip">Cat 1</span>
-				</li>
-				<li class="category-item">
-					<span
-						class="category-item-status"
-						style="background-color: #c43c5d"
-					></span>
-					<span class="category-item-text">Cat 2</span>
-					<span class="tooltip">Cat 2</span>
-				</li>
-				<li class="category-item">
-					<span
-						class="category-item-status"
-						style="background-color: #ff5050"
-					></span
-					><span class="category-item-text">Cat 3</span>
-					<span class="tooltip">Cat 3</span>
-				</li>
-				<li class="category-item">
-					<span
-						class="category-item-status"
-						style="background-color: #42ffdd"
-					></span>
-					<span class="category-item-text">Cat 4</span>
-					<span class="tooltip">Cat 4</span>
-				</li>
-			</ul>
-			<div class="account-item">
-				<img src="assets/images/logout.svg" alt="Logout" class="navicon" />
-				<span class="features-item-text">Logout</span>
-				<span class="tooltip">Logout</span>
+			<div class="main">
+				<h1>Insights</h1>
 			</div>
-		</div>
-		<div class="main">
-			<h1>Insights</h1>
 		</div>
 	</body>
 </html>
