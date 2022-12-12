@@ -7,7 +7,11 @@
 }
 * {
 	font-family: "Trebuchet MS", sans-serif;
+	font-size: 1rem;
 	color: var(--white-color);
+}
+h1 {
+	font-size: 2.5rem;
 }
 
 a {
@@ -15,32 +19,40 @@ a {
 }
 
 body {
-	position: relative;
-	display: grid;
+	/* position: relative; */
+
 	background-color: #292932;
-	width: 100%;
-	height: 100vh;
+	/* width: 100%; */
+	/* height: 100vh; */
 	padding: 0px;
 	margin: 0px;
-	top: 0px;
-	right: 0px;
+	/* top: 0px;
+	right: 0px; */
 }
+
+.layout {
+	display: grid;
+	grid-template-columns: 250px 1fr;
+	grid-template-rows: 1fr;
+}
+
 .side-bar {
 	width: var(--navwidth);
-	height: 100%;
-	padding: 1rem 1rem;
+	height: 100vh;
+	padding: 0px 1rem 0px 1rem;
 	background-color: var(--background-color);
-	position: fixed;
+	/* position: fixed; */
 	transition: all 0.5s ease;
-	top: 0px;
-	left: 0px;
-	z-index: 10;
+	/* top: 0px; */
+	/* left: 0px; */
+	/* z-index: 5; */
 }
 .logo-name-wrapper {
 	position: relative;
-	margin-bottom: 1rem;
+	margin: 1rem 0px;
 	display: flex;
 	font-size: 1.2rem;
+	align-items: center;
 }
 #logoicon {
 	justify-content: center;
@@ -51,16 +63,15 @@ body {
 	color: lightgray;
 	border-radius: 3px;
 }
-.logo-name__name {
+#brandname {
 	margin-left: 0.9rem;
-	white-space: nowrap;
+	margin-top: 1.4rem;
 }
 .separator {
 	height: 1px;
 	width: 100%;
 	background-color: lightgray;
 	opacity: 0.5;
-	margin-top: 0.75rem;
 }
 .navicon {
 	width: 2rem;
@@ -120,7 +131,7 @@ body {
 	left: -1rem;
 	height: 2rem;
 	margin-top: auto;
-	top: -1rem;
+	/* top: -1rem; */
 }
 .account-item:hover,
 .category-item:hover,
@@ -208,13 +219,15 @@ body {
 	pointer-events: none;
 }
 
-.main {
-	width: 77%;
-	margin: 2rem 2rem 2rem 16rem;
+.content {
+	width: 97%;
+	max-height: 100vh;
+	/* margin: 2rem 2rem 2rem 16rem; */
 	font-size: 1.25rem;
+	padding: 1rem;
 }
 
-.main.collapse {
+/* .content.collapse {
 	width: 85%;
 	margin: 2rem 2rem 2rem 8rem;
-}
+} */
