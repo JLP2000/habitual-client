@@ -2,7 +2,7 @@
 	--white-color: #fafafb;
 	--background-color: #111828;
 	--grey-color: #b5b5be;
-	--dark-grey-color: #292932;
+	--purple: #8758ff;
 	--navwidth: 12rem;
 }
 * {
@@ -168,7 +168,7 @@ body {
 	position: absolute;
 	top: -2.1rem;
 	left: 4.5rem;
-	background-color: var(--dark-grey-color);
+	background-color: var(--purple);
 	color: var(--white-color-color);
 	border-radius: 0.4rem;
 	padding: 0.5rem 0.9rem;
@@ -187,7 +187,7 @@ body {
 	top: 50%;
 	transform: translateY(-50%);
 	transition: all 0.5s ease;
-	opacity: 1;
+	opacity: 0.9;
 }
 .side-bar.collapse {
 	width: 3rem;

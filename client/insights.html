@@ -5,30 +5,37 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="assets/styles/nav.css" />
+		<script defer src="assets/scripts/nav.js"></script>
 		<title>Habitual | Insights</title>
 	</head>
 	<body class="grid">
 		<div class="side-bar" style="display: flex; flex-direction: column">
-			<div class="logo-name-wrapper"><div class="logo-name">logo</div></div>
+			<div class="logo-name-wrapper">
+				<img id="logoicon" src="assets/images/logoicon.png" alt="" />
+			</div>
 			<div class="separator"></div>
 			<ul class="features-list">
 				<a href="index.html" data-selected="false">
 					<li class="features-item home active">
-						<img src="assets/images/home.svg" alt="home" />
+						<img src="assets/images/home.svg" alt="home" class="navicon" />
 						<span class="features-item-text">Home</span>
 						<span class="tooltip">Home</span>
 					</li>
 				</a>
 				<a href="habits.html" data-selected="false">
 					<li class="features-item draft">
-						<img src="assets/images/all.svg" alt="all" />
+						<img src="assets/images/all.svg" alt="all" class="navicon" />
 						<span class="features-item-text">All</span>
 						<span class="tooltip">All</span>
 					</li>
 				</a>
 				<a href="#" data-selected="true">
 					<li class="features-item star">
-						<img src="assets/images/insights.svg" alt="insights" />
+						<img
+							src="assets/images/insights.svg"
+							alt="insights"
+							class="navicon"
+						/>
 						<span class="features-item-text">Insights</span>
 						<span class="tooltip">Insights</span>
 					</li>
@@ -70,13 +77,11 @@
 					<span class="tooltip">Cat 4</span>
 				</li>
 			</ul>
-			<!-- <ul class="account-list"> -->
 			<div class="account-item">
-				<img src="assets/images/logout.svg" alt="Logout" />
+				<img src="assets/images/logout.svg" alt="Logout" class="navicon" />
 				<span class="features-item-text">Logout</span>
 				<span class="tooltip">Logout</span>
 			</div>
-			<!-- </ul> -->
 		</div>
 		<div class="main">
 			<h1>Insights</h1>
