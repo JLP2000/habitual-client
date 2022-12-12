@@ -1,6 +1,6 @@
 let sideBar = document.querySelector(".side-bar")
-let main = document.querySelector(".main")
-sideBar.onclick = () => {
-	sideBar.classList.toggle("collapse")
-	main.classList.toggle("collapse")
-}
+let content = document.querySelector(".content")
+// sideBar.onclick = () => {
+// 	sideBar.classList.toggle("collapse")
+// 	content.classList.toggle("collapse")
+// }
