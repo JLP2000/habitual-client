@@ -32,7 +32,7 @@ button {
 }
 
 .list {
-	border-radius: 20px;
+	border-radius: 5px;
 	border: 2px solid white;
 	padding: 0.5rem 1rem 1.25rem 1rem;
 }
@@ -40,6 +40,7 @@ button {
 h4 {
 	padding: 0rem;
 	margin: 0.75rem 0.75rem 1rem 0.75rem;
+	font-size: 1.25rem;
 }
 
 .checkbox {
@@ -137,4 +138,18 @@ h4 {
 	50% {
 		transform: scale(1.2);
 	}
+}
+
+img.bird {
+	display: inline-block;
+	width: 40%;
+	opacity: 80%;
+}
+
+p.bird {
+	display: inline-block;
+	opacity: 80%;
+	font-size: 20px;
+	margin-left:10%;
+	padding-bottom:30px;
 }
