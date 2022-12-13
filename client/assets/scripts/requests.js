@@ -52,60 +52,54 @@ async function postNewHabit(e) {
 const newForm = document.querySelector("form")
 newForm.addEventListener("submit", postNewHabit)
 
+
+async function getAllHabitDates() {
+	return new Promise(async (res, rej) => {
+		const options = {
+			headers: {
+				Authorization: localStorage.getItem("session"),
+			},
+		}
+		const response = await fetch("http://localhost:3000/habits", options)
+
+		const habits = await response.json()
+
+		if (response.status !== 200) {
+			console.log(response)
+			rej(response)
+		} else {
+			res(habits)
+		}
+	})
+}
 // habitdate functions
-async function fillterIncomplete() {
-	getAllHabits()
-		.then((data) => {
-			data.filter((habit) => !habit.complete)
-			return incomplete
-		})
-		.catch((err) => {
-			if (err.status === 401) {
-				window.location.assign("login.html")
-			}
-		})
+let todayDate = dayjs().format('DD/MM/YYYY')
+async function filterIncomplete() {
+	const allhabits = await getAllHabits()
+	let incomplete = allhabits.filter((habit) => habit.complete == false)
+	return incomplete
 }
 
 async function getOverdue() {
-	const data = await fillterIncomplete()
-	console.log(data)
-	try {
-		const filteredByOverdue = data.filter((habit) => !habit.on_time)
-		return filteredByOverdue
-	} catch (err) {
-		console.warn(err)
-	}
+	const incomplete = await filterIncomplete()
+	const filteredByOverdue = incomplete.filter((habit) => habit.on_time == false)
+	return filteredByOverdue
 }
 
 async function getToday() {
-	const data = await fillterIncomplete()
-	try {
-		const filteredByToday = data.filter(
-			(habitDate) => dayjs(habitDate.date) == dayjs()
-		)
-		console.log("filteredByToday: ", filteredByToday)
-		return filteredByToday
-	} catch (err) {
-		console.warn(err)
-	}
+	const incomplete = await filterIncomplete()
+	const  filteredByToday = incomplete.filter((habitDate) => habitDate.date == today)
+	return filteredByToday
 }
-
-//data = []
-//filter -> habitdate.date > today
-//data.slice(indexfound)
 
 async function getUpcoming() {
-	const data = await fillterIncomplete()
-	try {
-		const filteredByUpcoming = data.filter((habitDate) =>
-			dayjs(habitDate.date).isAfter(dayjs())
-		)
-		console.log("filteredByUpcoming: ", filteredByUpcoming)
-		return filteredByUpcoming
-	} catch (err) {
-		console.warn(err)
-	}
+	const incomplete = await filterIncomplete()
+	const filteredByUpcoming = incomplete.filter((habitDate) =>
+		dayjs(habitDate.date).isAfter(dayjs().format('DD/MM/YYYY'))
+	)
+	return filteredByUpcoming
 }
+
 
 async function updateCompleted(checkbox) {
 	let id = checkbox.id

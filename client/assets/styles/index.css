@@ -50,6 +50,9 @@ h4 {
 	cursor: pointer;
 	margin-left: 16px;
 }
+input[type="checkbox"]{
+	display: none;
+}
 
 .checkbox span {
 	display: inline-block;
@@ -140,13 +143,13 @@ h4 {
 	}
 }
 
-img.bird {
+#bird {
 	display: inline-block;
 	width: 40%;
 	opacity: 80%;
 }
 
-p.bird {
+#noHabits {
 	display: inline-block;
 	opacity: 80%;
 	font-size: 20px;

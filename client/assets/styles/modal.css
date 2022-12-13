@@ -59,6 +59,7 @@ form * {
 	width: 80%;
 }
 
+.modal-content textarea,
 .modal-content input,
 .modal-content select {
 	background-color: black;
@@ -89,4 +90,12 @@ form * {
 	padding: 5px;
 	margin-left: 87%;
 	font-size: 18px;
+}
+
+label {
+	width: 7rem;
+}
+
+#colour {
+	height: 3rem;
 }

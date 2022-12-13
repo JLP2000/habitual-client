@@ -95,15 +95,15 @@
 				<button id="newHabit">Create New Habit</button>
 				<div class="streak">0 Streak</div>
 				<h1>Habit Tracking</h1>
-				<ul class="overdue-list list">
+				<ul class="list" id="overdue-list">
 					<h4>Overdue Habits</h4>
 				</ul>
-				<ul class="today-list list">
+				<ul class="list" id="today-list">
 					<h4>Today's Habits</h4>
-					<p class="bird">no habits today...</p>
-					<img class="bird" src="assets/images/bird.png" alt="" />
+					<p id="noHabits">no habits today...</p>
+					<img id="bird" src="assets/images/bird.png" alt="" />
 				</ul>
-				<ul class="upcoming-list list">
+				<ul class="list" id="upcoming-list">
 					<h4>Upcoming Habits</h4>
 				</ul>
 			</div>
@@ -120,7 +120,7 @@
 					</div>
 					<br />
 					<div class="forminput">
-						<label for="interval">Frequency</label>
+						<label for="interval">Every</label>
 						<input
 							type="number"
 							step="1"
@@ -129,7 +129,6 @@
 							id="interval"
 							name="intervalNum"
 						/>
-						<label for="timeframe"></label>
 						<select id="timeframe" name="timeframe">
 							<option value="days">days</option>
 							<option value="months">months</option>
@@ -146,6 +145,16 @@
 							default="2023-12-31"
 							name="end_date"
 						/>
+					</div>
+					<br />
+					<div class="forminput">
+						<label for="name">Notes</label>
+						<textarea id="blog" name="blog" rows="2" cols="50"></textarea>
+					</div>
+					<br />
+					<div class="forminput">
+						<label for="colour">Colour</label>
+						<input type="color" id="colour" name="colour" placeholder="#8758ff">
 					</div>
 					<br />
 					<input type="submit" value="submit" id="submitNew" />

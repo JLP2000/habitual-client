@@ -171,7 +171,7 @@
 					</div>
 					<br />
 					<div class="forminput">
-						<label for="interval">Frequency</label>
+						<label for="interval">Every</label>
 						<input
 							type="number"
 							step="1"
@@ -180,7 +180,6 @@
 							id="interval"
 							name="intervalNum"
 						/>
-						<label for="timeframe"></label>
 						<select id="timeframe" name="timeframe">
 							<option value="days">days</option>
 							<option value="months">months</option>
@@ -197,6 +196,16 @@
 							default="2023-12-31"
 							name="end_date"
 						/>
+					</div>
+					<br />
+					<div class="forminput">
+						<label for="name">Notes</label>
+						<textarea id="blog" name="blog" rows="2" cols="50"></textarea>
+					</div>
+					<br />
+					<div class="forminput">
+						<label for="colour">Colour</label>
+						<input type="color" id="colour" name="colour" placeholder="#8758ff">
 					</div>
 					<br />
 					<input type="submit" value="submit" id="submitNew" />

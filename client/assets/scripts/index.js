@@ -1,28 +1,36 @@
-// window.addEventListener("onload", renderLists)
-window.addEventListener("hashchange", renderLists)
+const overdue = document.getElementById("overdue-list")
+const today = document.getElementById("today-list")
+const upcoming = document.getElementById("upcoming-list")
 
-async function renderLists() {
-	console.log("hello everyone except sheena")
-	const overdueData = await getOverdue()
-	console.log(overdueData)
-	// const todayData = await getToday()
-	// const upcomingData = await upcomingData()
+window.addEventListener("load", renderOverdue)
+window.addEventListener("load", renderToday)
+window.addEventListener("load", renderUpcoming)
 
-	// const overdue = document.getElementsByClassName("overdue-list")
-	// overdueData.forEach((habitdate) => loadList(overdue, habitdate))
-
-	// const upcoming = document.getElementsByClassName("upcoming-list")
-	// upcomingData.forEach((habitdate) => loadList(upcoming, habitdate))
-
-	// if (todayData.length == 0) {
-	// 	document.getElementsByClassName("bird").style.display = "none"
-
-	// 	const today = document.getElementsByClassName("today-list")
-	// 	todayData.forEach((habitdate) => loadList(today, habitdate))
-	// } else {
-	// 	document.getElementsByClassName("bird").style.display = "inline-block"
-	// }
+async function renderOverdue() {
+	let incomplete = await getOverdue()
+	incomplete.forEach((habitdate) => loadList(overdue, habitdate))
 }
+
+async function renderToday() {
+	let incomplete = await getToday()
+	if (incomplete.length > 0) {
+		document.getElementById("noHabits").style.display = "none"
+		document.getElementById("bird").style.display = "none"
+	
+		const today = document.getElementsByClassName("today-list")
+		incomplete.forEach((habitdate) => loadList(today, habitdate))
+	} else {
+		document.getElementById("noHabits").style.display = "inline-block"
+		document.getElementById("bird").style.display = "inline-block"
+	}
+
+}
+async function renderUpcoming() {
+	let incomplete = await getUpcoming()
+	incomplete.forEach((habitdate) => loadList(upcoming, habitdate))
+}
+
+
 
 function loadList(list, data) {
 	const checkbox = document.createElement("input")
@@ -35,10 +43,10 @@ function loadList(list, data) {
 	const span1 = document.createElement("span")
 	const svg = document.createElement("svg")
 	svg.setAttribute("viewport", "0 0 12 9")
-	const polyline = createElement("polyline")
+	const polyline = document.createElementNS("http://www.w3.org/2000/svg", "polyline");
 	polyline.setAttribute("points", "1 5 4 8 11 1")
 	const span2 = document.createElement("span")
-	span2.textContent = data.habitdate_id
+	span2.textContent = data.name
 
 	list.appendChild(checkbox)
 	list.appendChild(label)
