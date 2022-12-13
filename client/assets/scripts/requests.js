@@ -53,15 +53,22 @@ const newForm = document.querySelector("form")
 newForm.addEventListener("submit", postNewHabit)
 
 // habitdate functions
-
 async function fillterIncomplete() {
-	let data = getAllHabits()
-	let incomplete = data.filter((habit) => !habit.complete)
-	return incomplete
+	getAllHabits()
+		.then((data) => {
+			data.filter((habit) => !habit.complete)
+			return incomplete
+		})
+		.catch((err) => {
+			if (err.status === 401) {
+				window.location.assign("login.html")
+			}
+		})
 }
 
 async function getOverdue() {
-	const data = fillterIncomplete()
+	const data = await fillterIncomplete()
+	console.log(data)
 	try {
 		const filteredByOverdue = data.filter((habit) => !habit.on_time)
 		return filteredByOverdue
@@ -71,12 +78,7 @@ async function getOverdue() {
 }
 
 async function getToday() {
-	// let today = new Date()
-	// var dd = String(today.getDate()).padStart(2, "0")
-	// var mm = String(today.getMonth() + 1).padStart(2, "0") //January is 0!
-	// var yyyy = today.getFullYear()
-	// today = yyyy + "-" + mm + "-" + dd + "T00:00:00.00Z"
-	const data = fillterIncomplete()
+	const data = await fillterIncomplete()
 	try {
 		const filteredByToday = data.filter(
 			(habitDate) => dayjs(habitDate.date) == dayjs()
@@ -92,8 +94,8 @@ async function getToday() {
 //filter -> habitdate.date > today
 //data.slice(indexfound)
 
-async function getUpcomming() {
-	const data = fillterIncomplete()
+async function getUpcoming() {
+	const data = await fillterIncomplete()
 	try {
 		const filteredByUpcoming = data.filter((habitDate) =>
 			dayjs(habitDate.date).isAfter(dayjs())
