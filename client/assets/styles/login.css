@@ -7,7 +7,8 @@
 }
 
 body {
-	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+		"Lucida Sans", Arial, sans-serif;
 	background-color: var(--background-color);
 }
 
@@ -25,7 +26,6 @@ section {
 	padding: 20px;
 	background-color: var(--white-color);
 }
-
 
 header {
 	display: flex;
@@ -69,9 +69,9 @@ input[type="submit"] {
 	font-weight: bolder;
 }
 
-
 a {
-	text-decoration: solid;
+	text-decoration: underline;
+	color: inherit;
 }
 
 #error-warning {
