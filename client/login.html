@@ -9,30 +9,35 @@
 		<title>Login | Habitual</title>
 	</head>
 	<body>
-		<main>
-			<img src="./assets/images/logoicon.png" alt="habitual" />
-			<h1>Login</h1>
-			<form id="login-form">
-				<label for="username">Username:</label>
-				<input
-					type="text"
-					id="username"
-					name="username"
-					placeholder="Username"
-				/>
+		<main><section>
+			<header>
+				<img src="./assets/images/logoicon.png" alt="habitual" />
+				<h1 id="logo">Habitual</h1>
+			</header>
 
-				<label for="password">Password:</label>
-				<input
-					type="password"
-					id="password"
-					name="password"
-					placeholder="Password"
-				/>
+			
+				<h2>Log in</h2>
+				<form id="login-form">
+				
+					<input
+						type="text"
+						id="username"
+						name="username"
+						placeholder="Username"
+					/>
+				
+					<input
+						type="password"
+						id="password"
+						name="password"
+						placeholder="Password"
+					/>
+					<input type="submit" value="Log in" />
+				</form>
+				<p id="error-warning" display="none">Invalid login details</p>
+				<p>Don't have an account? <a href="register.html">Sign up</a></p>
+			</section>
 
-				<input type="submit" value="Log in" />
-			</form>
-			<p id="error-warning" display="none">Invalid login details</p>
-			<p>Don't have an account? <a href="register.html">Sign up</a></p>
 		</main>
 	</body>
 </html>

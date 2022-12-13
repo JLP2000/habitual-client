@@ -1,3 +1,16 @@
+:root {
+	--white-color: #fafafb;
+	--background-color: #111828;
+	--grey-color: #b5b5be;
+	--purple: #8758ff;
+	--navwidth: 12rem;
+}
+
+body {
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	background-color: var(--background-color);
+}
+
 main {
 	display: flex;
 	flex-direction: column;
@@ -5,7 +18,30 @@ main {
 	align-items: center;
 }
 
-#login-form {
+section {
+	margin-top: 70px;
+	border: 1px solid;
+	border-radius: 10px;
+	padding: 20px;
+	background-color: var(--white-color);
+}
+
+
+header {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	height: 100px;
+	gap: 5px;
+}
+
+img {
+	height: 60px;
+	width: auto;
+}
+
+form {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -15,7 +51,29 @@ main {
 input[type="text"],
 input[type="password"] {
 	display: inline-block;
+	border: 1px solid var(--background-color);
+	font-size: 20px;
+	border-radius: 5px;
+	padding: 12px 20px;
+	width: 300px;
+	margin-bottom: 8px;
 }
 
-input-text:focus {
+input[type="submit"] {
+	border: none;
+	border-radius: 10px;
+	background-color: var(--purple);
+	padding: 10px 20px;
+	width: 100%;
+	font-size: 20px;
+	font-weight: bolder;
+}
+
+
+a {
+	text-decoration: solid;
+}
+
+#error-warning {
+	display: none;
 }
