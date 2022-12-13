@@ -10,7 +10,7 @@
 		<link rel="stylesheet" href="assets/styles/habit-component.css" />
 		<script defer src="assets/scripts/nav.js"></script>
 		<script defer src="assets/scripts/modal.js"></script>
-		<script src="assets/scripts/requests.js"></script>
+		<script defer src="assets/scripts/requests.js"></script>
 		<script defer src="assets/scripts/habits.js"></script>
 		<title>Habitual | All habits</title>
 	</head>
@@ -166,14 +166,21 @@
 				<form>
 					<div class="forminput">
 						<label for="name">Habit Name</label>
-						<input type="text" id="name" />
+						<input type="text" id="name" name="name" />
 					</div>
 					<br />
 					<div class="forminput">
-						<label for="frequency">Frequency</label>
-						<input type="number" step="1" type="range" min="1" id="frequency" />
+						<label for="interval">Frequency</label>
+						<input
+							type="number"
+							step="1"
+							type="range"
+							min="1"
+							id="interval"
+							name="intervalNum"
+						/>
 						<label for="timeframe"></label>
-						<select nultiple id="timeframe" name="timeframe">
+						<select id="timeframe" name="timeframe">
 							<option value="days">days</option>
 							<option value="months">months</option>
 						</select>
@@ -181,9 +188,14 @@
 					<br />
 					<div class="forminput">
 						<label for="start_dt">Start Date</label>
-						<input type="date" id="start_dt" />
+						<input type="date" id="start_dt" name="start_date" />
 						<label for="end_dt">End Date</label>
-						<input type="date" id="end_dt" default="2023-12-31" />
+						<input
+							type="date"
+							id="end_dt"
+							default="2023-12-31"
+							name="end_date"
+						/>
 					</div>
 					<br />
 					<input type="submit" value="submit" id="submitNew" />
