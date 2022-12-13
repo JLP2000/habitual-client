@@ -22,7 +22,7 @@ async function renderToday() {
 	} else {
 		document.getElementById("noHabits").style.display = "inline-block"
 		document.getElementById("bird").style.display = "inline-block"
-	}
+	}}
 
 async function renderUpcoming() {
 	let incomplete = await getUpcoming()
