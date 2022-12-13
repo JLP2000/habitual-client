@@ -2,20 +2,37 @@ const habitsContainer = document.querySelector(".habits-container")
 const editButton = document.querySelector("#editHabit")
 const deleteButton = document.querySelector("#deleteHabit")
 
-//store all habits (and habitdates) organised by their id here
-let uniqueHabits
+//store all habits (and habitdates) organised into pages
+//{
+//	0: [
+//		{
+//			habit_id: [{info}, {info}]
+//		}
+//	],
+//
+//}
+let groupedHabitsByPage
 
 async function loadHabits() {
 	getAllHabits()
 		.then((data) => {
-			uniqueHabits = [...data].reduce((acc, curr) => {
+			const groupedHabits = [...data].reduce((acc, curr) => {
 				const key = curr["habit_id"]
 				const curGroup = acc[key] ?? []
 
 				return { ...acc, [key]: [...curGroup, curr] }
 			}, {})
 
-			for (const [key, value] of Object.entries(uniqueHabits)) {
+			console.log(groupedHabits)
+
+			//reduce to pages
+			// TODO
+			groupedHabitsByPage = Object.entries(groupedHabits).reduce(
+				(acc, curr, index) => {},
+				{}
+			)
+
+			for (const [key, value] of Object.entries(groupedHabits)) {
 				const el = createHabitElement(value[0])
 				habitsContainer.appendChild(el)
 			}
@@ -26,6 +43,8 @@ async function loadHabits() {
 			}
 		})
 }
+
+function displayHabitsByPage(page) {}
 
 async function loadHabitById(id) {
 	getHabitById(id)
@@ -64,7 +83,7 @@ function updateContent(e) {
 	let hash = window.location.hash.substring(1)
 	// to be used when connected to server
 	// loadHabitById(hash)
-	let habit = uniqueHabits[hash]
+	let habit = groupedHabits[hash]
 	renderMenuContent(habit[0])
 }
 
