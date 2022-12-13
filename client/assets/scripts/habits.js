@@ -2,11 +2,13 @@ const habitsContainer = document.querySelector(".habits-container")
 const editButton = document.querySelector("#editHabit")
 const deleteButton = document.querySelector("#deleteHabit")
 
+//store all habits (and habitdates) organised by their id here
+let uniqueHabits
+
 async function loadHabits() {
 	getAllHabits()
 		.then((data) => {
-			console.log([...data])
-			const uniqueHabits = [...data].reduce((acc, curr) => {
+			uniqueHabits = [...data].reduce((acc, curr) => {
 				const key = curr["habit_id"]
 				const curGroup = acc[key] ?? []
 
@@ -34,7 +36,6 @@ async function loadHabitById(id) {
 }
 
 function createHabitElement(data) {
-	console.log(data)
 	const habitLink = document.createElement("a")
 	habitLink.href = `#${data.habit_id}`
 
@@ -63,8 +64,8 @@ function updateContent(e) {
 	let hash = window.location.hash.substring(1)
 	// to be used when connected to server
 	// loadHabitById(hash)
-	let habitIndex = data.findIndex((habit) => habit.id == hash)
-	renderMenuContent(data[habitIndex])
+	let habit = uniqueHabits[hash]
+	renderMenuContent(habit[0])
 }
 
 function renderMenuContent(habit) {
@@ -82,11 +83,11 @@ function renderMenuContent(habit) {
 
 	const start = document.querySelector(".menu-start")
 	start.className = "menu-start"
-	start.textContent = habit.start_date
+	start.textContent = dayjs(habit.start_date).format("DD/MM/YYYY")
 
 	const end = document.querySelector(".menu-end")
 	end.className = "menu-end"
-	end.textContent = habit.end_date
+	end.textContent = dayjs(habit.end_date).format("DD/MM/YYYY")
 
 	const interval = document.querySelector(".menu-interval")
 	interval.className = "menu-interval"
@@ -127,9 +128,10 @@ function formatInterval(days, months) {
 	}
 }
 
-function formatNote(note = "") {
-	if (note.length > 50) return `${note.substring(0, 50)}...`
-	else return note
+function formatNote(note) {
+	const thisNote = note ?? ""
+	if (thisNote.length > 50) return `${thisNote.substring(0, 50)}...`
+	else return thisNote
 }
 
 loadHabits()
