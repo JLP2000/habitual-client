@@ -26,8 +26,8 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
 		// Stash the token
 		localStorage.setItem("session", data.session)
 
-		// Send the user to login.html
-		window.location.assign("board.html")
+		// Send the user to index.html
+		window.location.assign("index.html")
 	} else {
 		warning.style.display = "block"
 	}
