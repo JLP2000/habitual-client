@@ -4,6 +4,10 @@
 	grid-template-rows: 1fr;
 }
 
+.habits-container {
+	flex: 4 0 auto;
+}
+
 .container {
 	max-height: 100vh;
 	display: flex;
