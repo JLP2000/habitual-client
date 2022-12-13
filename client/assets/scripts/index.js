@@ -1,28 +1,27 @@
-const container = document.querySelector(".container")
-const editButton = document.querySelector("#editHabit")
-const deleteButton = document.querySelector("#deleteHabit")
-
-window.addEventListener("onload", renderLists)
+// window.addEventListener("onload", renderLists)
+window.addEventListener("hashchange", renderLists)
 
 async function renderLists() {
+	console.log("hello everyone except sheena")
 	const overdueData = await getOverdue()
-	const todayData = await getToday()
-	const upcomingData = await upcomingData()
+	console.log(overdueData)
+	// const todayData = await getToday()
+	// const upcomingData = await upcomingData()
 
-	const overdue = document.getElementsByClassName("overdue-list")
-	overdueData.forEach((habitdate) => loadList(overdue, habitdate))
+	// const overdue = document.getElementsByClassName("overdue-list")
+	// overdueData.forEach((habitdate) => loadList(overdue, habitdate))
 
-	const upcoming = document.getElementsByClassName("upcoming-list")
-	upcomingData.forEach((habitdate) => loadList(upcoming, habitdate))
+	// const upcoming = document.getElementsByClassName("upcoming-list")
+	// upcomingData.forEach((habitdate) => loadList(upcoming, habitdate))
 
-	if (todayData.length == 0) {
-		document.getElementsByClassName("bird").style.display = "none"
+	// if (todayData.length == 0) {
+	// 	document.getElementsByClassName("bird").style.display = "none"
 
-		const today = document.getElementsByClassName("today-list")
-		todayData.forEach((habitdate) => loadList(today, habitdate))
-	} else {
-		document.getElementsByClassName("bird").style.display = "inline-block"
-	}
+	// 	const today = document.getElementsByClassName("today-list")
+	// 	todayData.forEach((habitdate) => loadList(today, habitdate))
+	// } else {
+	// 	document.getElementsByClassName("bird").style.display = "inline-block"
+	// }
 }
 
 function loadList(list, data) {
@@ -53,3 +52,5 @@ const checkboxes = document.querySelectorAll("input[type=checkbox]")
 checkboxes.forEach((checkbox) => {
 	checkbox.addEventListener("change", updateCompleted)
 })
+
+function loadStreak() {}
