@@ -24,13 +24,10 @@ async function renderToday() {
 		document.getElementById("bird").style.display = "inline-block"
 	}
 
-}
 async function renderUpcoming() {
 	let incomplete = await getUpcoming()
 	incomplete.forEach((habitdate) => loadList(upcoming, habitdate))
 }
-
-
 
 function loadList(list, data) {
 	const checkbox = document.createElement("input")
@@ -60,5 +57,3 @@ const checkboxes = document.querySelectorAll("input[type=checkbox]")
 checkboxes.forEach((checkbox) => {
 	checkbox.addEventListener("change", updateCompleted)
 })
-
-function loadStreak() {}

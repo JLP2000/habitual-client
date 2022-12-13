@@ -52,26 +52,6 @@ async function postNewHabit(e) {
 const newForm = document.querySelector("form")
 newForm.addEventListener("submit", postNewHabit)
 
-
-async function getAllHabitDates() {
-	return new Promise(async (res, rej) => {
-		const options = {
-			headers: {
-				Authorization: localStorage.getItem("session"),
-			},
-		}
-		const response = await fetch("http://localhost:3000/habits", options)
-
-		const habits = await response.json()
-
-		if (response.status !== 200) {
-			console.log(response)
-			rej(response)
-		} else {
-			res(habits)
-		}
-	})
-}
 // habitdate functions
 let todayDate = dayjs().format('DD/MM/YYYY')
 async function filterIncomplete() {
@@ -98,7 +78,9 @@ async function getUpcoming() {
 		dayjs(habitDate.date).isAfter(dayjs().format('DD/MM/YYYY'))
 	)
 	return filteredByUpcoming
-}
+=======
+// habitdate functions
+
 
 
 async function updateCompleted(checkbox) {
@@ -112,3 +94,6 @@ async function updateCompleted(checkbox) {
 		console.warn(err)
 	}
 }
+
+const newForm = document.querySelector("form")
+newForm.addEventListener("submit", postNewHabit)
