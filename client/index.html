@@ -9,9 +9,11 @@
 		<link rel="stylesheet" href="assets/styles/modal.css" />
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.7/dayjs.min.js"></script>
 		<script defer src="assets/scripts/requests.js"></script>
+		<script defer src="assets/scripts/dataUtils.js"></script>
 		<script defer src="assets/scripts/nav.js"></script>
 		<script defer src="assets/scripts/index.js"></script>
 		<script defer src="assets/scripts/modal.js"></script>
+		<script defer src="assets/scripts/streaks.js"></script>
 		<title>Habitual | Home</title>
 	</head>
 	<body>
@@ -37,7 +39,7 @@
 							<span class="tooltip">All</span>
 						</li>
 					</a>
-					<a href="insights.html" data-selected="false">
+					<!-- <a href="insights.html" data-selected="false">
 						<li class="features-item star">
 							<img
 								src="assets/images/insights.svg"
@@ -47,10 +49,10 @@
 							<span class="features-item-text">Insights</span>
 							<span class="tooltip">Insights</span>
 						</li>
-					</a>
+					</a> -->
 				</ul>
 				<div class="separator"></div>
-				<ul class="category-list">
+				<!--<ul class="category-list">
 					<div class="category-header">Categories</div>
 					<li class="category-item">
 						<span
@@ -84,7 +86,7 @@
 						<span class="category-item-text">Cat 4</span>
 						<span class="tooltip">Cat 4</span>
 					</li>
-				</ul>
+				</ul> -->
 				<a href="login.html" class="account-item">
 					<img src="assets/images/logout.svg" alt="Logout" class="navicon" />
 					<span class="features-item-text">Logout</span>
@@ -92,8 +94,14 @@
 				</a>
 			</div>
 			<div class="content">
+				<div class="streak">Streak: <span id="streakNum">0</span></div>
+
+				<div id="loginInfo">Logged in as:</div>
+				<div id="dateInfo"></div>
+
+				<br />
 				<button id="newHabit">Create New Habit</button>
-				<div class="streak">0 Streak</div>
+				<br />
 				<h1>Habit Tracking</h1>
 				<h4>Overdue Habits</h4>
 				<ul class="list" id="overdue-list"></ul>
@@ -137,12 +145,7 @@
 						<label for="start_dt">Start Date</label>
 						<input type="date" id="start_dt" name="start_date" />
 						<label for="end_dt">End Date</label>
-						<input
-							type="date"
-							id="end_dt"
-							default="2023-12-31"
-							name="end_date"
-						/>
+						<input type="date" id="end_dt" value="2023-12-31" name="end_date" />
 					</div>
 					<br />
 					<div class="forminput">
@@ -152,7 +155,13 @@
 					<br />
 					<div class="forminput">
 						<label for="colour">Colour</label>
-						<input type="color" id="colour" name="colour" default="#8758ff" />
+						<select id="colour" name="colour">
+							<option value="#708090" selected>Default</option>
+							<option value="#79d861">Green</option>
+							<option value="#c43c5d">Cherry</option>
+							<option value="#ff5050">Orange</option>
+							<option value="#42ffdd">Cyan</option>
+						</select>
 					</div>
 					<br />
 					<input type="submit" value="submit" id="submitNew" />

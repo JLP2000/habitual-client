@@ -7,28 +7,41 @@
 }
 .streak {
 	float: right;
+	margin-top: 4%;
 	margin-right: 2rem;
-	font-size: 1.7rem;
 	font-weight: bolder;
 	padding: 0.3rem 0.55rem;
 	display: block;
-	float: right;
+	font-size: 1.7rem;
 }
+
+#streakNum {
+	font-size: 1.7rem;
+	padding: 0.3rem 0.55rem;
+	font-weight: bolder;
+	margin-top: 4%;
+}
+
 h1 {
 	display: inline-block;
 }
 
 button {
 	margin-top: 0.45rem;
+	background: linear-gradient(#0000, rgb(0 0 0/15%)) top/100% 800%;
 	background-color: var(--purple);
 	border: none;
 	border-radius: 5px;
+	top: 50%;
+	left: 50%;
 	font-size: 1.25rem;
 	font-weight: bold;
 	padding: 0.3rem 0.55rem;
-	display: block;
-	float: right;
 	cursor: pointer;
+}
+
+button:hover {
+	background-position: bottom;
 }
 
 .list {
@@ -40,7 +53,8 @@ button {
 }
 
 #today-list {
-	height: 35%;
+	height: auto;
+	max-height: 33%;
 }
 
 h4 {
@@ -49,13 +63,12 @@ h4 {
 	font-size: 1.25rem;
 }
 
-.checkbox label {
+.checkbox {
 	-webkit-user-select: none;
 	user-select: none;
 	-webkit-tap-highlight-color: transparent;
 	cursor: pointer;
 	margin-left: 16px;
-	width: 100%;
 }
 input[type="checkbox"] {
 	display: none;
@@ -68,8 +81,8 @@ input[type="checkbox"] {
 
 .checkbox span:first-child {
 	position: relative;
-	width: 24px;
-	height: 24px;
+	width: 18px;
+	height: 18px;
 	border-radius: 50%;
 	transform: scale(1);
 	vertical-align: middle;
@@ -82,8 +95,8 @@ input[type="checkbox"] {
 	z-index: 1;
 	width: 12p;
 	height: 9px;
-	top: 8px;
-	left: 6px;
+	top: 5px;
+	left: 3px;
 	fill: none;
 	stroke: #8758ff;
 	stroke-width: 2;
@@ -124,22 +137,22 @@ input[type="checkbox"] {
 	border-color: #8758ff;
 }
 
-.input-checkbox:checked + .checkbox span:first-child {
+.ticked + .checkbox span:first-child {
 	animation: check 0.6s ease;
 	border: 2px solid var(--purple);
 }
 
-.input-checkbox:checked + .checkbox span:first-child svg {
+.ticked + .checkbox span:first-child svg {
 	stroke-dashoffset: 0;
 }
 
-.input-checkbox:checked + .checkbox span:first-child:before {
+.ticked + .checkbox span:first-child:before {
 	transform: scale(2.2);
 	opacity: 0;
 	transition: all 0.6s ease;
 }
 
-.input-checkbox:checked + .checkbox span:last-child {
+.ticked + .checkbox span:last-child {
 	color: #8758ff;
 	transition: all 0.3s ease;
 }
@@ -152,7 +165,7 @@ input[type="checkbox"] {
 
 #bird {
 	display: inline-block;
-	width: 35%;
+	width: 30%;
 	opacity: 80%;
 }
 
@@ -160,9 +173,26 @@ input[type="checkbox"] {
 	display: inline-block;
 	opacity: 80%;
 	font-size: 20px;
-	margin-left: 10%;
+	margin-left: 15%;
 	padding-bottom: 30px;
 }
 .habitdate {
 	margin-bottom: 4px;
+}
+
+#loginInfo {
+	margin-right: -9%;
+	font-size: 1rem;
+	font-weight: bolder;
+	padding: 0.3rem 0.55rem;
+	float: right;
+}
+
+#dateInfo {
+	margin-top: 1%;
+	margin-right: -11%;
+	font-size: 1rem;
+	font-weight: bolder;
+	padding: 0.3rem 0.55rem;
+	float: right;
 }

@@ -2,13 +2,30 @@ const overdue = document.getElementById("overdue-list")
 const today = document.getElementById("today-list")
 const upcoming = document.getElementById("upcoming-list")
 
+window.addEventListener("load", loadDate)
+window.addEventListener("load", renderUsername)
 window.addEventListener("load", renderOverdue)
 window.addEventListener("load", renderToday)
 window.addEventListener("load", renderUpcoming)
 
+async function loadDate() {
+	let today_date = new Date().toString()
+	let date = today_date.split(" ")
+	console.log(date)
+	const dateInfo = document.querySelector("#dateInfo")
+	dateInfo.textContent = `${date[0]} ${date[2]} ${date[1]} ${date[3]}`
+}
+
+async function renderUsername() {
+	const info = document.querySelector("#loginInfo")
+	info.textContent = ""
+	let username = await GetUsername()
+	info.textContent = `Logged in as: ${username}`
+}
+
 async function renderOverdue() {
 	let incomplete = await getOverdue()
-	incomplete.forEach((habitdate) => loadList(overdue, habitdate))
+	incomplete.forEach((habitdate) => loadList(overdue, habitdate, true))
 }
 
 async function renderToday() {
@@ -26,17 +43,26 @@ async function renderToday() {
 
 async function renderUpcoming() {
 	let incomplete = await getUpcoming()
-	incomplete.forEach((habitdate) => loadList(upcoming, habitdate))
+	incomplete.forEach((habitdate) => loadList(upcoming, habitdate, true))
 }
 
-function loadList(list, data) {
+function loadList(list, data, showDate) {
 	const form = document.createElement("form")
 	form.setAttribute("class", "habitdate")
+	form.setAttribute("id", `form_${data.habitdate_id}`)
 	const checkbox = document.createElement("input")
 	checkbox.setAttribute("type", "checkbox")
 	checkbox.setAttribute("id", data.habitdate_id)
 	checkbox.setAttribute("class", "input-checkbox")
 	checkbox.setAttribute("name", "completed")
+	//check data and set if complete
+	if (data.complete) {
+		checkbox.setAttribute("checked", "checked")
+		checkbox.classList.add("ticked")
+	}
+
+	checkbox.onclick = (ev) => updateHabitdate(ev)
+	// checkbox.setAttribute("checked", "checked");
 	const label = document.createElement("label")
 	label.setAttribute("class", "checkbox")
 	label.setAttribute("for", data.habitdate_id)
@@ -49,7 +75,17 @@ function loadList(list, data) {
 	)
 	polyline.setAttribute("points", "1 5 4 8 11 1")
 	const span2 = document.createElement("span")
-	span2.textContent = data.name
+
+	// text content format: Habit Name (DD-MM-YYYY)
+	if (showDate) {
+		span2.textContent = `${data.name} (${
+			data.date.slice(0, 10).split("-")[2]
+		}-${data.date.slice(0, 10).split("-")[1]}-${
+			data.date.slice(0, 10).split("-")[0]
+		})`
+	} else {
+		span2.textContent = `${data.name}`
+	}
 
 	list.appendChild(form)
 	form.appendChild(checkbox)
