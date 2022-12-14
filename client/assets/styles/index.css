@@ -7,7 +7,7 @@
 }
 .streak {
 	float: right;
-	margin-top: 4%;
+	/* margin-top: 4; */
 	margin-right: 2rem;
 	font-weight: bolder;
 	padding: 0.3rem 0.55rem;
@@ -173,26 +173,30 @@ input[type="checkbox"] {
 	display: inline-block;
 	opacity: 80%;
 	font-size: 20px;
-	margin-left: 15%;
+	margin-left: 25%;
 	padding-bottom: 30px;
 }
 .habitdate {
 	margin-bottom: 4px;
 }
 
-#loginInfo {
+/* #loginInfo {
 	margin-right: -9%;
 	font-size: 1rem;
 	font-weight: bolder;
 	padding: 0.3rem 0.55rem;
 	float: right;
-}
+} */
 
-#dateInfo {
+/* #dateInfo {
 	margin-top: 1%;
 	margin-right: -11%;
 	font-size: 1rem;
 	font-weight: bolder;
 	padding: 0.3rem 0.55rem;
 	float: right;
-}
+} */
+ .info {
+	float:right;
+	text-align: right;
+ }
