@@ -28,5 +28,6 @@ document
 			window.location.assign("login.html")
 		} else {
 			warning.style.display = "block"
+			warning.style.color = "red"
 		}
 	})
