@@ -14,6 +14,7 @@
 
 .habits-container {
 	flex: 4 0 auto;
+	overflow: hidden;
 }
 
 .container {
@@ -43,10 +44,6 @@
 
 button {
 	background: linear-gradient(#0000, rgb(0 0 0/20%)) top/100% 800%;
-}
-
-.habits-container {
-	overflow: hidden;
 }
 
 .habit-container {
