@@ -101,16 +101,7 @@
 						</div>
 						<div class="habits-container"></div>
 						<div style="text-align: center">
-							<div class="pagination">
-								<a href="#">&laquo;</a>
-								<a href="#" class="active">1</a>
-								<a href="#">2</a>
-								<a href="#">3</a>
-								<a href="#">4</a>
-								<a href="#">5</a>
-								<a href="#">6</a>
-								<a href="#">&raquo;</a>
-							</div>
+							<div class="pagination"></div>
 						</div>
 					</div>
 					<div class="menu">
@@ -129,6 +120,7 @@
 							<div>
 								<div class="menu-info">Name</div>
 								<div class="menu-name"></div>
+								<input type="text" class="edit-name" />
 							</div>
 
 							<div>
@@ -149,12 +141,19 @@
 							<div>
 								<div class="menu-info">Note</div>
 								<div class="menu-note"></div>
+								<textarea
+									name="edit-note"
+									class="edit-note"
+									cols="20"
+									rows="5"
+								></textarea>
 							</div>
 
 							<div>
-								<div class="menu-info">Colour</div>
-								<div class="menu-colour"></div>
+								<div class="menu-colour">Colour</div>
+								<input type="color" class="edit-colour" />
 							</div>
+							<button id="updateButton">Update</button>
 						</div>
 					</div>
 				</div>
@@ -199,17 +198,25 @@
 					</div>
 					<br />
 					<div class="forminput">
-						<label for="name">Notes</label>
-						<textarea id="blog" name="blog" rows="2" cols="50"></textarea>
+						<label for="note">Notes</label>
+						<textarea id="note" name="note" rows="2" cols="50"></textarea>
 					</div>
 					<br />
 					<div class="forminput">
 						<label for="colour">Colour</label>
-						<input type="color" id="colour" name="colour" placeholder="#8758ff">
+						<input type="color" id="colour" name="colour" default="#8758ff" />
 					</div>
 					<br />
 					<input type="submit" value="submit" id="submitNew" />
 				</form>
+			</div>
+		</div>
+
+		<div id="deleteWarning">
+			<div class="modal-content">
+				<span>Are you sure you want to delete this habit?</span>
+				<button id="confirmDelete" class="deleteButtons">Yes</button>
+				<button id="cancelDelete" class="deleteButtons">No</button>
 			</div>
 		</div>
 	</body>

@@ -1,6 +1,7 @@
 const habitsContainer = document.querySelector(".habits-container")
 const editButton = document.querySelector("#editHabit")
 const deleteButton = document.querySelector("#deleteHabit")
+const paginationContainer = document.querySelector(".pagination")
 
 //store all habits (and habitdates) organised into pages
 //{
@@ -11,31 +12,53 @@ const deleteButton = document.querySelector("#deleteHabit")
 //	],
 //
 //}
+let groupedHabits
 let groupedHabitsByPage
 
 async function loadHabits() {
 	getAllHabits()
 		.then((data) => {
-			const groupedHabits = [...data].reduce((acc, curr) => {
+			groupedHabits = {}
+			groupedHabitsByPage = {}
+
+			//group habitdates by habit id
+			groupedHabits = [...data].reduce((acc, curr) => {
 				const key = curr["habit_id"]
 				const curGroup = acc[key] ?? []
 
 				return { ...acc, [key]: [...curGroup, curr] }
 			}, {})
 
-			console.log(groupedHabits)
-
-			//reduce to pages
-			// TODO
+			//reduce groupedhabits to pages of 7
+			let pageCount = 0
 			groupedHabitsByPage = Object.entries(groupedHabits).reduce(
-				(acc, curr, index) => {},
+				(acc, curr, index) => {
+					if (index > 0 && index % 7 === 0) {
+						//create new page to push groups into
+						pageCount++
+					}
+					const curPage = acc[pageCount] ?? []
+					return {
+						...acc,
+						[pageCount]: [...curPage, { [curr[0]]: [...curr[1]] }],
+					}
+				},
 				{}
 			)
 
-			for (const [key, value] of Object.entries(groupedHabits)) {
-				const el = createHabitElement(value[0])
-				habitsContainer.appendChild(el)
+			//find out which page user is on
+			const path = window.location.href
+			const pageNum = path.split("page=")[1] ?? "1"
+
+			//use length of groupedHabitsByPage to display pagination
+			if (Object.values(groupedHabitsByPage).length > 1) {
+				displayPagination(Object.values(groupedHabitsByPage).length, pageNum)
 			}
+
+			Object.entries(groupedHabitsByPage)[pageNum - 1][1].forEach((habit) => {
+				const el = createHabitElement(Object.values(habit)[0][0])
+				habitsContainer.appendChild(el)
+			})
 		})
 		.catch((err) => {
 			if (err.status === 401) {
@@ -44,7 +67,20 @@ async function loadHabits() {
 		})
 }
 
-function displayHabitsByPage(page) {}
+function displayPagination(pagesAmount, pageNum) {
+	for (let i = 0; i < pagesAmount; i++) {
+		const el = document.createElement("a")
+		el.setAttribute("href", `?page=${i + 1}`)
+		el.textContent = i + 1
+		if (i == pageNum - 1) el.classList.add("active")
+		paginationContainer.appendChild(el)
+	}
+	paginationContainer.style.visibility = "visible"
+}
+
+function displayHabitsByPage(page) {
+	//get page by hash
+}
 
 async function loadHabitById(id) {
 	getHabitById(id)
@@ -56,7 +92,7 @@ async function loadHabitById(id) {
 
 function createHabitElement(data) {
 	const habitLink = document.createElement("a")
-	habitLink.href = `#${data.habit_id}`
+	habitLink.href = `#habit${data.habit_id}`
 
 	const habit = document.createElement("div")
 	habit.className = "habit-container"
@@ -81,10 +117,15 @@ window.addEventListener("hashchange", updateContent)
 
 function updateContent(e) {
 	let hash = window.location.hash.substring(1)
-	// to be used when connected to server
-	// loadHabitById(hash)
-	let habit = groupedHabits[hash]
-	renderMenuContent(habit[0])
+	//check if string contains 'habit'
+	//else change page by number selected
+	if (hash.includes("habit")) {
+		let habitNum = hash.substring(5)
+		let habit = groupedHabits[habitNum]
+		renderMenuContent(habit[0])
+	} else {
+		displayHabitsByPage(hash)
+	}
 }
 
 function renderMenuContent(habit) {
@@ -118,18 +159,93 @@ function renderMenuContent(habit) {
 	const note = document.querySelector(".menu-note")
 	note.className = "menu-note"
 	note.textContent = habit.note
+}
 
+function renderEditForm() {
+	const name = document.querySelector(".menu-name")
+	const note = document.querySelector(".menu-note")
 	const colour = document.querySelector(".menu-colour")
-	colour.className = "menu-colour"
-	colour.textContent = habit.colour
+	const nameForm = document.querySelector(".edit-name")
+	const noteForm = document.querySelector(".edit-note")
+	const colourForm = document.querySelector(".edit-colour")
+	const updateButton = document.getElementById("updateButton")
+
+	name.style.display = "none"
+	note.style.display = "none"
+	colour.style.display = "none"
+	nameForm.value = name.textContent
+	nameForm.style.display = "block"
+
+	noteForm.value = note.textContent
+	noteForm.style.display = "block"
+
+	colour.style.display = "block"
+	colourForm.value = colour.textContent
+	colourForm.style.display = "block"
+
+	updateButton.style.display = "block"
+}
+
+function closeEditForm() {
+	const name = document.querySelector(".menu-name")
+	const note = document.querySelector(".menu-note")
+	const colour = document.querySelector(".menu-colour")
+	const nameForm = document.querySelector(".edit-name")
+	const noteForm = document.querySelector(".edit-note")
+	const colourForm = document.querySelector(".edit-colour")
+	const updateButton = document.getElementById("updateButton")
+
+	nameForm.style.display = "none"
+	noteForm.style.display = "none"
+	// name.textContent = nameForm.value
+	name.style.display = "block"
+
+	// note.textContent = noteForm.value
+	note.style.display = "block"
+	colourForm.style.display = "none"
+	updateButton.style.display = "none"
+	colour.style.display = "none"
 }
 
 function onEditHabit(e) {
+	renderEditForm()
+	const menu = document.querySelector(".menu")
+	document.addEventListener("click", (e) => {
+		if (!menu.contains(e.target)) {
+			closeEditForm()
+		}
+	})
+	document.getElementById("updateButton").addEventListener("click", (e) => {
+		const newName = document.querySelector(".edit-name").value
+		const newNote = document.querySelector(".edit-note").value
+		const newColour = document.querySelector(".edit-colour").value
+
+		const updateData = {
+			id: window.location.hash.substring(6),
+			name: newName,
+			note: newNote,
+			colour: newColour,
+		}
+		updateHabit(updateData)
+		closeEditForm()
+		window.location.assign("habits.html")
+	})
 	console.log("edit")
 }
 
 function onDeleteHabit(e) {
-	console.log("delete")
+	const deleteWarning = document.querySelector("#deleteWarning")
+	deleteWarning.style.display = "block"
+	let id = window.location.hash.substring(6)
+	console.log(id)
+	document.querySelector("#confirmDelete").addEventListener("click", (e) => {
+		deleteHabit(id)
+		deleteWarning.style.display = "none"
+		window.location.assign("habits.html")
+	})
+	document.querySelector("#cancelDelete").addEventListener("click", (e) => {
+		deleteWarning.style.display = "none"
+	})
 }
 
 editButton.addEventListener("click", onEditHabit)

@@ -71,8 +71,7 @@
 .menu-start,
 .menu-end,
 .menu-interval,
-.menu-note,
-.menu-colour {
+.menu-note {
 	font-size: 1rem;
 }
 
@@ -93,6 +92,7 @@
 }
 
 .menu-content {
+	position: relative;
 	height: 100%;
 	display: none;
 	flex-direction: column;
@@ -102,13 +102,30 @@
 	margin: 0.5rem 0px;
 }
 
-.menu-info {
+.menu-info,
+.menu-colour {
 	display: none;
 	color: lightslategray;
 }
 
 .menu-info-show {
 	display: block;
+}
+
+.edit-name,
+.edit-note,
+.edit-colour {
+	position: absolute;
+	display: none;
+	background-color: #111828;
+}
+
+#updateButton {
+	position: absolute;
+	right: 0;
+	bottom: 10%;
+	display: none;
+	color: black;
 }
 
 div:has(.menu-name) {
@@ -121,4 +138,8 @@ div:has(.menu-note) {
 
 div:has(.menu-colour) {
 	flex-grow: 2;
+}
+
+.pagination {
+	visibility: hidden;
 }
