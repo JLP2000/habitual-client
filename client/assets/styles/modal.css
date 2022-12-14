@@ -92,7 +92,7 @@ form * {
 	font-size: 18px;
 }
 
-label {
+.modal label {
 	width: 7rem;
 }
 
@@ -123,4 +123,25 @@ label {
 	border: 1px solid var(--white-color);
 	border-radius: 5px;
 	font-size: 18px;
+}
+
+/* Colour options */
+option[value="#708090"] {
+	color: #708090;
+}
+option[value="#79d861"] {
+	color: #79d861;
+}
+option[value="#c43c5d"] {
+	color: #c43c5d;
+}
+option[value="#ff5050"] {
+	color: #ff5050;
+}
+option[value="#42ffdd"] {
+	color: #42ffdd;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+	background-color: var(--purple);
 }
