@@ -48,7 +48,8 @@ async function loadHabits() {
 
 			//find out which page user is on
 			const path = window.location.href
-			const pageNum = path.split("page=")[1] ?? "1"
+			let pageNum = path.split("page=")[1] ?? "1"
+			pageNum = pageNum.substring(0, 1)
 
 			//use length of groupedHabitsByPage to display pagination
 			if (Object.values(groupedHabitsByPage).length > 1) {
