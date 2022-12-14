@@ -3,15 +3,6 @@ const editButton = document.querySelector("#editHabit")
 const deleteButton = document.querySelector("#deleteHabit")
 const paginationContainer = document.querySelector(".pagination")
 
-//store all habits (and habitdates) organised into pages
-//{
-//	0: [
-//		{
-//			habit_id: [{info}, {info}]
-//		}
-//	],
-//
-//}
 let groupedHabits
 let groupedHabitsByPage
 
@@ -22,29 +13,10 @@ async function loadHabits() {
 			groupedHabitsByPage = {}
 
 			//group habitdates by habit id
-			groupedHabits = [...data].reduce((acc, curr) => {
-				const key = curr["habit_id"]
-				const curGroup = acc[key] ?? []
-
-				return { ...acc, [key]: [...curGroup, curr] }
-			}, {})
+			groupedHabits = groupHabitsById(data)
 
 			//reduce groupedhabits to pages of 7
-			let pageCount = 0
-			groupedHabitsByPage = Object.entries(groupedHabits).reduce(
-				(acc, curr, index) => {
-					if (index > 0 && index % 7 === 0) {
-						//create new page to push groups into
-						pageCount++
-					}
-					const curPage = acc[pageCount] ?? []
-					return {
-						...acc,
-						[pageCount]: [...curPage, { [curr[0]]: [...curr[1]] }],
-					}
-				},
-				{}
-			)
+			groupedHabitsByPage = organiseHabitsByPage(groupedHabits)
 
 			//find out which page user is on
 			const path = window.location.href
@@ -77,10 +49,6 @@ function displayPagination(pagesAmount, pageNum) {
 		paginationContainer.appendChild(el)
 	}
 	paginationContainer.style.visibility = "visible"
-}
-
-function displayHabitsByPage(page) {
-	//get page by hash
 }
 
 async function loadHabitById(id) {
