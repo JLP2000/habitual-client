@@ -20,8 +20,6 @@ async function getAllHabits() {
 	})
 }
 
-async function getHabitById(id) {}
-
 async function postNewHabit(e) {
 	e.preventDefault()
 
@@ -30,10 +28,9 @@ async function postNewHabit(e) {
 		habitObj.interval_in_days = habitObj.intervalNum
 	} else habitObj.interval_in_months = habitObj.intervalNum
 
+	//delete unwanted body props
 	delete habitObj.intervalNum
 	delete habitObj.timeframe
-
-	console.log(habitObj)
 
 	try {
 		const options = {
@@ -111,13 +108,14 @@ async function getOverdue() {
 	const filteredByOverdue = incomplete.filter(
 		(habit) => new Date(habit.date) < yesterday
 	)
+	// console.log(filteredByOverdue)
 	return filteredByOverdue
 }
 
 //TODO refactor to use stored data from filterIncomplete
 async function getToday() {
-	const incomplete = await filterIncomplete()
-	const filteredByToday = incomplete.filter((habit) => {
+	const allhabits = await getAllHabits()
+	const filteredByToday = allhabits.filter((habit) => {
 		return new Date(habit.date).toJSON().slice(0, 10) == today_date
 	})
 	return filteredByToday
@@ -138,13 +136,54 @@ async function getUpcoming() {
 	return uniqueDates
 }
 
-async function updateCompleted(checkbox) {
-	let habitdate_id = checkbox.id
+function getOntime() {
+	let now = new Date().toJSON().slice(0, 10)
+	if (now == today_date) {
+		on_time = true
+		return on_time
+	} else {
+		return false
+	}
+}
+
+async function updateHabitdate(updateDataEvent) {
+	let id = updateDataEvent.target.id
+	const thisEl = document.getElementById(`${id}`)
+	thisEl.setAttribute("checked", "checked")
+	thisEl.classList.add("ticked")
+	let on_time = await getOntime()
+	const req = {
+		complete: true,
+		on_time: on_time,
+	}
 	try {
 		const options = {
-			method: "GET",
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(req),
 		}
-		await fetch(`http://localhost:3000/habitdates/${id}`)
+		const response = await fetch(
+			`http://localhost:3000/habitdates/${id}`,
+			options
+		)
+		return response
+	} catch (err) {
+		console.warn(err)
+	}
+}
+
+async function GetUsername() {
+	try {
+		const options = {
+			headers: { Authorization: localStorage.getItem("session") },
+		}
+		let token = localStorage.getItem("session")
+		const response = await fetch(`http://localhost:3000/users/${token}`)
+		const data = await response.json()
+
+		return data.title
 	} catch (err) {
 		console.warn(err)
 	}
