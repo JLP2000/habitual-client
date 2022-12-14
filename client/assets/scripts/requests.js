@@ -1,3 +1,5 @@
+const allHabits = getAllHabits()
+
 async function getAllHabits() {
 	return new Promise(async (res, rej) => {
 		const options = {
@@ -44,6 +46,42 @@ async function postNewHabit(e) {
 		}
 		const response = await fetch(`http://localhost:3000/habits`, options)
 		const { id, err } = await response.json()
+		window.location.reload()
+	} catch (err) {
+		alert("Failed to create new Habit")
+		console.warn(err)
+	}
+}
+
+async function deleteHabit(id) {
+	try {
+		const options = {
+			method: "DELETE",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: localStorage.getItem("session"),
+			},
+		}
+		const response = await fetch(`http://localhost:3000/habits/${id}`, options)
+	} catch (err) {
+		console.warn(err)
+	}
+}
+
+async function updateHabit(updateData) {
+	try {
+		const options = {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: localStorage.getItem("session"),
+			},
+			body: JSON.stringify(updateData),
+		}
+		const response = await fetch(
+			`http://localhost:3000/habits/${updateData.id}`,
+			options
+		)
 	} catch (err) {
 		console.warn(err)
 	}
@@ -53,38 +91,55 @@ const newForm = document.querySelector("form")
 newForm.addEventListener("submit", postNewHabit)
 
 // habitdate functions
-let todayDate = dayjs().format('DD/MM/YYYY')
+let todayDate = new Date()
+let today_date = new Date().toJSON().slice(0, 10)
+
+const yesterday = new Date(todayDate)
+yesterday.setDate(yesterday.getDate() - 1)
+todayDate.toDateString()
+yesterday.toDateString()
+
 async function filterIncomplete() {
 	const allhabits = await getAllHabits()
 	let incomplete = allhabits.filter((habit) => habit.complete == false)
 	return incomplete
 }
 
+//TODO refactor to use stored data from filterIncomplete
 async function getOverdue() {
 	const incomplete = await filterIncomplete()
-	const filteredByOverdue = incomplete.filter((habit) => habit.on_time == false)
+	const filteredByOverdue = incomplete.filter(
+		(habit) => new Date(habit.date) < yesterday
+	)
 	return filteredByOverdue
 }
 
+//TODO refactor to use stored data from filterIncomplete
 async function getToday() {
 	const incomplete = await filterIncomplete()
-	const  filteredByToday = incomplete.filter((habitDate) => habitDate.date == today)
+	const filteredByToday = incomplete.filter((habit) => {
+		return new Date(habit.date).toJSON().slice(0, 10) == today_date
+	})
 	return filteredByToday
 }
 
+//TODO refactor to use stored data from filterIncomplete
 async function getUpcoming() {
 	const incomplete = await filterIncomplete()
-	const filteredByUpcoming = incomplete.filter((habitDate) =>
-		dayjs(habitDate.date).isAfter(dayjs().format('DD/MM/YYYY'))
+	const filteredByUpcoming = incomplete.filter(
+		(habit) => new Date(habit.date) > todayDate
 	)
-	return filteredByUpcoming
-=======
-// habitdate functions
-
-
+	const uniqueHabitID = [
+		...new Set(filteredByUpcoming.map((habit) => habit["habit_id"])),
+	]
+	const uniqueDates = uniqueHabitID.map((id) =>
+		filteredByUpcoming.find((habit) => habit.habit_id == id)
+	)
+	return uniqueDates
+}
 
 async function updateCompleted(checkbox) {
-	let id = checkbox.id
+	let habitdate_id = checkbox.id
 	try {
 		const options = {
 			method: "GET",
@@ -94,6 +149,3 @@ async function updateCompleted(checkbox) {
 		console.warn(err)
 	}
 }
-
-const newForm = document.querySelector("form")
-newForm.addEventListener("submit", postNewHabit)
