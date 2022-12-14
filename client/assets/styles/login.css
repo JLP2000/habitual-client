@@ -62,11 +62,17 @@ input[type="password"] {
 input[type="submit"] {
 	border: none;
 	border-radius: 10px;
-	background-color: var(--purple);
 	padding: 10px 20px;
 	width: 100%;
 	font-size: 20px;
 	font-weight: bolder;
+	background: linear-gradient(#0000, rgb(0 0 0/20%)) top/100% 800%;
+	background-color: var(--purple);
+	transition: 0.5s;
+}
+
+input[type="submit"]:hover {
+	background-position: bottom;
 }
 
 a {

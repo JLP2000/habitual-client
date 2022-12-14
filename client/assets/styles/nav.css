@@ -7,7 +7,7 @@
 }
 * {
 	font-family: "Trebuchet MS", sans-serif;
-	font-size: 1rem;
+	font-size: 0.9rem;
 	color: var(--white-color);
 }
 h1 {
@@ -21,7 +21,7 @@ a {
 body {
 	/* position: relative; */
 	background-color: #292932;
-	/* width: 100%; */
+	/* width: 100%;
 	/* height: 100vh; */
 	padding: 0px;
 	margin: 0px;
@@ -33,17 +33,17 @@ body {
 	display: grid;
 	grid-template-columns: 250px 1fr;
 	grid-template-rows: 1fr;
+	width: 100%;
 }
 
 .side-bar {
 	width: var(--navwidth);
-	height: 100%;
+	min-height: 100vh;
+	height: auto;
 	padding: 0px 1rem 0px 1rem;
 	background-color: var(--background-color);
 	/* position: fixed; */
 	transition: all 0.5s ease;
-	/* top: 0px; */
-	/* left: 0px; */
 	/* z-index: 5; */
 }
 .logo-name-wrapper {
@@ -127,10 +127,11 @@ body {
 	transition: 0.5s ease;
 	padding: 0.5rem 0.5rem 0.5rem 1.5rem;
 	width: var(--navwidth);
-	left: -1rem;
+	left: 0rem;
 	height: 2rem;
 	margin-top: auto;
-	/* top: -1rem; */
+	position: fixed;
+	bottom: 0rem;
 }
 .account-item:hover,
 .category-item:hover,
@@ -219,8 +220,8 @@ body {
 }
 
 .content {
-	width: 100%;
-	max-height: 100%;
+	width: auto;
+	min-height: 100vh;
 	/* margin: 2rem 2rem 2rem 16rem; */
 	font-size: 1.25rem;
 	padding: 1rem 2rem 1rem 0rem;
