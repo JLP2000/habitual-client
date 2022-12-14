@@ -55,6 +55,7 @@ function loadList(list, data, showDate) {
 	checkbox.setAttribute("id", data.habitdate_id)
 	checkbox.setAttribute("class", "input-checkbox")
 	checkbox.setAttribute("name", "completed")
+	checkbox.setAttribute("autocomplete", "off")
 	//check data and set if complete
 	if (data.complete) {
 		checkbox.setAttribute("checked", "checked")
@@ -62,7 +63,6 @@ function loadList(list, data, showDate) {
 	}
 
 	checkbox.onclick = (ev) => updateHabitdate(ev)
-	// checkbox.setAttribute("checked", "checked");
 	const label = document.createElement("label")
 	label.setAttribute("class", "checkbox")
 	label.setAttribute("for", data.habitdate_id)
