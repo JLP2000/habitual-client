@@ -122,7 +122,7 @@ async function getToday() {
 }
 
 //TODO refactor to use stored data from filterIncomplete
-async function getUpcoming() {
+async function getUpcoming(id) {
 	const incomplete = await filterIncomplete()
 	const filteredByUpcoming = incomplete.filter(
 		(habit) => new Date(habit.date) > todayDate
@@ -136,9 +136,16 @@ async function getUpcoming() {
 	return uniqueDates
 }
 
-function getOntime() {
+async function getDatebyID(id){
+	return new Promise(async (res, rej) => {
+		const response = await fetch(`http://localhost:3000/habitdates/${id}`)
+		return response.rows[0].date
+	})
+}
+
+function getOntime(id) {
 	let now = new Date().toJSON().slice(0, 10)
-	if (now == today_date) {
+	if (now == getDatebyID(id)) {
 		on_time = true
 		return on_time
 	} else {
@@ -151,7 +158,7 @@ async function updateHabitdate(updateDataEvent) {
 	const thisEl = document.getElementById(`${id}`)
 	thisEl.setAttribute("checked", "checked")
 	thisEl.classList.add("ticked")
-	let on_time = await getOntime()
+	let on_time = await getOntime(id)
 	const req = {
 		complete: true,
 		on_time: on_time,
