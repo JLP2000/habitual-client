@@ -86,11 +86,10 @@ body {
 	color: var(--grey-color);
 	font-size: 1rem;
 	font-weight: 500;
-	margin: 1rem 0rem;
 }
 .features-list,
 .category-list {
-	margin: 1rem 0rem;
+	margin: 1rem 0rem 0rem 0rem;
 }
 .account-list {
 	margin: 0rem 0rem;
