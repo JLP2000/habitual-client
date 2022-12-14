@@ -34,7 +34,13 @@ button {
 .list {
 	border-radius: 5px;
 	border: 2px solid white;
-	padding: 0.5rem 1rem 1.25rem 1rem;
+	padding: 1rem 1rem 1.25rem 1rem;
+	overflow: scroll;
+	height: 8rem;
+}
+
+#today-list {
+	height: 35%;
 }
 
 h4 {
@@ -43,14 +49,15 @@ h4 {
 	font-size: 1.25rem;
 }
 
-.checkbox {
+.checkbox label {
 	-webkit-user-select: none;
 	user-select: none;
 	-webkit-tap-highlight-color: transparent;
 	cursor: pointer;
 	margin-left: 16px;
+	width: 100%;
 }
-input[type="checkbox"]{
+input[type="checkbox"] {
 	display: none;
 }
 
@@ -145,7 +152,7 @@ input[type="checkbox"]{
 
 #bird {
 	display: inline-block;
-	width: 40%;
+	width: 35%;
 	opacity: 80%;
 }
 
@@ -153,6 +160,9 @@ input[type="checkbox"]{
 	display: inline-block;
 	opacity: 80%;
 	font-size: 20px;
-	margin-left:10%;
-	padding-bottom:30px;
+	margin-left: 10%;
+	padding-bottom: 30px;
+}
+.habitdate {
+	margin-bottom: 4px;
 }
