@@ -92,8 +92,6 @@ function updateContent(e) {
 		let habitNum = hash.substring(5)
 		let habit = groupedHabits[habitNum]
 		renderMenuContent(habit[0])
-	} else {
-		displayHabitsByPage(hash)
 	}
 }
 
@@ -128,12 +126,16 @@ function renderMenuContent(habit) {
 	const note = document.querySelector(".menu-note")
 	note.className = "menu-note"
 	note.textContent = habit.note
+
+	const colour = document.querySelector(".colour-value")
+	colour.textContent = habit.colour
 }
 
 function renderEditForm() {
 	const name = document.querySelector(".menu-name")
 	const note = document.querySelector(".menu-note")
 	const colour = document.querySelector(".menu-colour")
+	const colourValue = document.querySelector(".colour-value")
 	const nameForm = document.querySelector(".edit-name")
 	const noteForm = document.querySelector(".edit-note")
 	const colourForm = document.querySelector(".edit-colour")
@@ -149,10 +151,12 @@ function renderEditForm() {
 	noteForm.style.display = "block"
 
 	colour.style.display = "block"
-	colourForm.value = colour.textContent
+	colourForm.value = colourValue.textContent
 	colourForm.style.display = "block"
 
 	updateButton.style.display = "block"
+
+	nameForm.focus()
 }
 
 function closeEditForm() {

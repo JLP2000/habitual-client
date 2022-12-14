@@ -1,3 +1,11 @@
+:root {
+	--white-color: #fafafb;
+	--background-color: #111828;
+	--grey-color: #b5b5be;
+	--purple: #8758ff;
+	--navwidth: 12rem;
+}
+
 .habits-grid {
 	display: grid;
 	grid-template-columns: 1fr 30%;
@@ -16,7 +24,7 @@
 }
 
 .new-habit {
-	align-self: center;
+	align-self: left;
 }
 
 .new-habit > button {
@@ -28,12 +36,26 @@
 	font-weight: bold;
 	padding: 0.3rem 0.55rem;
 	display: block;
-	float: right;
+	/* float: right; */
 	cursor: pointer;
+	margin-bottom: 8px;
+}
+
+button {
+	background: linear-gradient(#0000, rgb(0 0 0/20%)) top/100% 800%;
 }
 
 .habits-container {
 	overflow: hidden;
+}
+
+.habit-container {
+	background: linear-gradient(#0000, rgb(0 0 0/15%)) top/100% 800%;
+	transition: 0.5s;
+}
+
+.habit-container:hover {
+	background-position: bottom;
 }
 
 .pagination {
@@ -115,9 +137,18 @@
 .edit-name,
 .edit-note,
 .edit-colour {
-	position: absolute;
 	display: none;
-	background-color: #111828;
+	background-color: #292932;
+	border: 1px solid white;
+	border-radius: 5px;
+}
+
+#editHabit,
+#deleteHabit {
+	color: var(--white-color);
+	background-color: var(--purple);
+	border: none;
+	border-radius: 5px;
 }
 
 #updateButton {
@@ -125,10 +156,12 @@
 	right: 0;
 	bottom: 10%;
 	display: none;
-	color: black;
+	background-color: var(--purple);
+	border: none;
+	border-radius: 5px;
 }
 
-div:has(.menu-name) {
+/* div:has(.menu-name) {
 	flex: 0 0 5rem;
 }
 
@@ -138,8 +171,21 @@ div:has(.menu-note) {
 
 div:has(.menu-colour) {
 	flex-grow: 2;
+} */
+
+button:hover {
+	background-position: bottom;
+}
+
+.menu-note {
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
 }
 
 .pagination {
 	visibility: hidden;
+}
+
+.colour-value {
+	display: none;
 }
