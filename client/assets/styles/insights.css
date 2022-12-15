@@ -49,6 +49,7 @@ button {
 	cursor: auto;
 	border-bottom: 2px solid slategray;
 	height: 3rem;
+	border-radius: 0px;
 }
 
 h2,
