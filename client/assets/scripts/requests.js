@@ -136,17 +136,18 @@ async function getUpcoming(id) {
 	return uniqueDates
 }
 
-async function getDatebyID(id){
+async function getDatebyID(id) {
 	return new Promise(async (res, rej) => {
 		const response = await fetch(`http://localhost:3000/habitdates/${id}`)
-		return response.rows[0].date
+		res(response.date)
 	})
 }
 
-function getOntime(id) {
-	let now = new Date().toJSON().slice(0, 10)
-	if (now == getDatebyID(id)) {
-		on_time = true
+async function getOntime(id) {
+	let now = dayjs()
+	const habitDate = await getDatebyID(id)
+	if (now.isSame(dayjs(habitDate), "day")) {
+		let on_time = true
 		return on_time
 	} else {
 		return false
@@ -154,6 +155,7 @@ function getOntime(id) {
 }
 
 async function updateHabitdate(updateDataEvent) {
+	// updateDataEvent.preventDefault()
 	let id = updateDataEvent.target.id
 	const thisEl = document.getElementById(`${id}`)
 	thisEl.setAttribute("checked", "checked")
@@ -178,6 +180,12 @@ async function updateHabitdate(updateDataEvent) {
 		return response
 	} catch (err) {
 		console.warn(err)
+	} finally {
+		getStreaksData()
+			.then((data) => {
+				document.querySelector("#streakNum").textContent = data[0].streakCount
+			})
+			.catch((err) => console.warn(err))
 	}
 }
 
@@ -194,4 +202,69 @@ async function GetUsername() {
 	} catch (err) {
 		console.warn(err)
 	}
+}
+
+async function getStreaksData() {
+	return new Promise(async (res, rej) => {
+		let ongoingHabits = []
+
+		getAllHabits()
+			.then((data) => {
+				//filter habits that are ongoing
+				let groupedHabitsById = groupHabitsById(data)
+				Object.entries(groupedHabitsById).forEach((habit) => {
+					let habitDates = habit[1]
+
+					let length = habitDates.length
+					for (let i = length - 1; i > 0; i--) {
+						if (
+							dayjs(habitDates[i].date).isAfter(dayjs()) ||
+							dayjs(habitDates[i].date).isSame(dayjs(), "day")
+						) {
+							ongoingHabits.push({ [habit[0]]: habit[1] })
+							break
+						}
+					}
+				})
+
+				let streaksArr = []
+
+				ongoingHabits.forEach((habit) => {
+					let habitDatesBefore = Object.values(habit)[0].filter((habitdate) => {
+						return (
+							dayjs(habitdate.date).isBefore(dayjs()) ||
+							dayjs(habitdate.date).isSame(dayjs(), "day")
+						)
+					})
+
+					habitDatesBefore.sort((a, b) => {
+						return dayjs(a.date).isBefore(dayjs(b.date)) ? -1 : 1
+					})
+
+					let count = 0
+					let length = habitDatesBefore.length
+					for (let i = length - 1; i > 0; i--) {
+						if (habitDatesBefore[i].on_time) count++
+						else {
+							if (dayjs(habitDatesBefore[i].date).isSame(dayjs(), "day")) {
+								//check yesterday for ongoing streak,
+								if (habitDatesBefore[i - 1].on_time) continue
+							} else break
+						}
+					}
+
+					streaksArr.push({
+						habit_id: Object.keys(habit)[0],
+						habitName: Object.values(habit)[0][0].name,
+						streakCount: count,
+					})
+				})
+
+				//sort descending
+				streaksArr.sort((a, b) => b.streakCount - a.streakCount)
+				console.log(streaksArr)
+				res(streaksArr)
+			})
+			.catch((err) => rej(err))
+	})
 }

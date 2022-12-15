@@ -1,6 +1,7 @@
 const overdue = document.getElementById("overdue-list")
 const today = document.getElementById("today-list")
 const upcoming = document.getElementById("upcoming-list")
+const streakElement = document.querySelector("#streakNum")
 
 window.addEventListener("load", loadDate)
 window.addEventListener("load", renderUsername)
@@ -43,10 +44,10 @@ async function renderToday() {
 
 async function renderUpcoming() {
 	let incomplete = await getUpcoming()
-	incomplete.forEach((habitdate) => loadList(upcoming, habitdate, true))
+	incomplete.forEach((habitdate) => loadList(upcoming, habitdate, true, true))
 }
 
-function loadList(list, data, showDate) {
+function loadList(list, data, showDate, disableCheckbox) {
 	const form = document.createElement("form")
 	form.setAttribute("class", "habitdate")
 	form.setAttribute("id", `form_${data.habitdate_id}`)
@@ -55,6 +56,12 @@ function loadList(list, data, showDate) {
 	checkbox.setAttribute("id", data.habitdate_id)
 	checkbox.setAttribute("class", "input-checkbox")
 	checkbox.setAttribute("name", "completed")
+
+	// Users cannot complete upcoming habits
+	if (disableCheckbox) {
+		checkbox.disabled = true
+	}
+
 	checkbox.setAttribute("autocomplete", "off")
 	//check data and set if complete
 	if (data.complete) {
@@ -95,3 +102,9 @@ function loadList(list, data, showDate) {
 	svg.appendChild(polyline)
 	label.appendChild(span2)
 }
+
+getStreaksData()
+	.then((data) => {
+		streakElement.textContent = data[0].streakCount
+	})
+	.catch((err) => console.warn(err))
