@@ -79,12 +79,12 @@ button {
 }
 
 .menu {
-	border: 1px solid white;
-	border-radius: 5px;
-	padding: 2rem 2rem 0px 2rem;
+	justify-content: center;
 	margin: 0px 1rem;
 	top: 20px;
-	height: 80vh;
+	height: 70vh;
+	border-left: 1px solid var(--grey-color);
+	padding-left: 20px;
 }
 
 .menu-name,
@@ -96,7 +96,6 @@ button {
 }
 
 .menu-actions > button {
-	color: black;
 	display: none;
 }
 
@@ -107,8 +106,13 @@ button {
 	justify-content: center;
 }
 
+.menu-placeholder > img {
+	width: 100%;
+}
+
 .menu-placeholder > p {
 	text-align: center;
+	font-size: 1.8rem;
 }
 
 .menu-content {
@@ -190,4 +194,19 @@ button:hover {
 
 .colour-value {
 	display: none;
+}
+
+@media (max-width: 380px) {
+	.menu-placeholder > p {
+		font-size: 10px;
+	}
+
+	.habits-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.menu {
+		border: none;
+		padding-left: 0px;
+	}
 }

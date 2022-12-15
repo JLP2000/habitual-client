@@ -4,6 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/x-icon" href="assets/images/logoicon.png" />
 		<link rel="stylesheet" href="assets/styles/nav.css" />
 		<link rel="stylesheet" href="assets/styles/modal.css" />
 		<link rel="stylesheet" href="assets/styles/habits.css" />
@@ -14,7 +15,7 @@
 		<script defer src="assets/scripts/modal.js"></script>
 		<script defer src="assets/scripts/requests.js"></script>
 		<script defer src="assets/scripts/habits.js"></script>
-		<title>Habitual | All habits</title>
+		<title>All Habits | Habitual</title>
 	</head>
 	<body>
 		<div class="layout">
@@ -58,76 +59,75 @@
 					<span class="tooltip">Logout</span>
 				</a>
 			</div>
-			<div class="content">
-				<h1>All Habits</h1>
-				<div class="habits-grid">
-					<div class="container">
-						<div class="new-habit">
-							<button id="newHabit">Create New Habit</button>
+			<div class="page">
+				<div class="content">
+					<h1>All Habits</h1>
+					<div class="habits-grid">
+						<div class="container">
+							<div class="new-habit">
+								<button id="newHabit">Create New Habit</button>
+							</div>
+							<div class="habits-container"></div>
+							<div style="text-align: center">
+								<div class="pagination"></div>
+							</div>
 						</div>
-						<div class="habits-container"></div>
-						<div style="text-align: center">
-							<div class="pagination"></div>
-						</div>
-					</div>
-					<div class="menu">
-						<div class="menu-actions">
-							<button id="editHabit">Edit</button>
-							<button id="deleteHabit">Delete</button>
-						</div>
-						<div class="menu-placeholder">
-							<img
-								src="assets/images/octo-ph.png"
-								alt="Illustration of octopus juggling devices"
-							/>
-							<p>Click on your habits for maximum habit efficiency!</p>
-						</div>
-						<div class="menu-content">
-							<div>
-								<div class="menu-info">Name</div>
-								<div class="menu-name"></div>
-								<input type="text" class="edit-name" />
+						<div class="menu">
+							<div class="menu-actions">
+								<button id="editHabit">Edit</button>
+								<button id="deleteHabit">Delete</button>
 							</div>
-
-							<div>
-								<div class="menu-info">Start</div>
-								<div class="menu-start"></div>
+							<div class="menu-placeholder">
+								<img
+									src="assets/images/octo-ph.png"
+									alt="Illustration of octopus juggling devices"
+									width="200px"
+									style="align-self: center"
+								/>
+								<p>Click a habit to manage a habit!</p>
 							</div>
-
-							<div>
-								<div class="menu-info">End</div>
-								<div class="menu-end"></div>
+							<div class="menu-content">
+								<div>
+									<div class="menu-info">Name</div>
+									<div class="menu-name"></div>
+									<input type="text" class="edit-name" />
+								</div>
+								<div>
+									<div class="menu-info">Start</div>
+									<div class="menu-start"></div>
+								</div>
+								<div>
+									<div class="menu-info">End</div>
+									<div class="menu-end"></div>
+								</div>
+								<div>
+									<div class="menu-info">Interval</div>
+									<div class="menu-interval"></div>
+								</div>
+								<div>
+									<div class="menu-info">Notes</div>
+									<div class="menu-note"></div>
+									<textarea
+										name="edit-note"
+										class="edit-note"
+										cols="23"
+										rows="6"
+									></textarea>
+								</div>
+								<div>
+									<div class="menu-colour">Colour</div>
+									<div class="colour-value"></div>
+									<select class="edit-colour">
+										<option value="#708090">Grey</option>
+										<option value="#8758ff">Purple</option>
+										<option value="#79d861">Green</option>
+										<option value="#c43c5d">Cherry</option>
+										<option value="#ff5050">Orange</option>
+										<option value="#0470DC">Blue</option>
+									</select>
+								</div>
+								<button id="updateButton">Update</button>
 							</div>
-
-							<div>
-								<div class="menu-info">Interval</div>
-								<div class="menu-interval"></div>
-							</div>
-
-							<div>
-								<div class="menu-info">Notes</div>
-								<div class="menu-note"></div>
-								<textarea
-									name="edit-note"
-									class="edit-note"
-									cols="23"
-									rows="6"
-								></textarea>
-							</div>
-
-							<div>
-								<div class="menu-colour">Colour</div>
-								<div class="colour-value"></div>
-								<select class="edit-colour">
-									<option value="#708090">Grey</option>
-									<option value="#8758ff">Purple</option>
-									<option value="#79d861">Green</option>
-									<option value="#c43c5d">Cherry</option>
-									<option value="#ff5050">Orange</option>
-									<option value="#0470DC">Blue</option>
-								</select>
-							</div>
-							<button id="updateButton">Update</button>
 						</div>
 					</div>
 				</div>
@@ -162,6 +162,7 @@
 					<div class="forminput">
 						<label for="start_dt">Start Date</label>
 						<input type="date" id="start_dt" name="start_date" />
+						<br />
 						<label for="end_dt">End Date</label>
 						<input type="date" id="end_dt" value="2023-12-31" name="end_date" />
 					</div>
@@ -183,7 +184,7 @@
 						</select>
 					</div>
 					<br />
-					<input type="submit" value="submit" id="submitNew" />
+					<input type="submit" value="Submit" id="submitNew" />
 				</form>
 			</div>
 		</div>

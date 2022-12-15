@@ -23,7 +23,7 @@
 /* Modal Content/Box */
 .modal-content {
 	background-color: var(--background-color);
-	margin: 15% auto;
+	margin: 5% auto;
 	padding: 2rem 4rem;
 	border: 2px solid var(--grey-color);
 	border-radius: 5px;
@@ -68,6 +68,10 @@ form * {
 	border-radius: 5px;
 }
 
+.modal-content textarea {
+	width: inherit;
+}
+
 #name {
 	width: 60%;
 }
@@ -99,7 +103,7 @@ form * {
 }
 
 .modal label {
-	width: 7rem;
+	width: 6rem;
 }
 
 #colour {

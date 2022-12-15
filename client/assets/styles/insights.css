@@ -45,7 +45,6 @@ button {
 }
 
 .habit-container {
-	background: linear-gradient(#0000, rgb(0 0 0/15%)) top/100% 800%;
 	transition: 0.5s;
 	cursor: auto;
 	border-bottom: 2px solid slategray;

@@ -135,7 +135,7 @@ input[type="checkbox"] {
 	transform: scaleX(0);
 }
 .checkbox:hover span:first-child {
-	border-color: #8758ff;
+	border-color: var(--purple);
 }
 
 .ticked + .checkbox span:first-child {
@@ -154,7 +154,7 @@ input[type="checkbox"] {
 }
 
 .ticked + .checkbox span:last-child {
-	color: #8758ff;
+	color: var(--purple);
 	transition: all 0.3s ease;
 }
 
@@ -165,16 +165,18 @@ input[type="checkbox"] {
 }
 
 #bird {
-	display: inline-block;
-	width: 30%;
+	display: block;
+	width: 20%;
 	opacity: 80%;
+	margin: auto;
 }
 
 #noHabits {
-	display: inline-block;
+	display: block;
 	opacity: 80%;
 	font-size: 20px;
-	margin-left: 25%;
+	/* margin-left: 25%; */
+	text-align: center;
 	padding-bottom: 30px;
 }
 .habitdate {

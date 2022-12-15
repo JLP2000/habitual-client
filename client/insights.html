@@ -4,6 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/x-icon" href="assets/images/logoicon.png" />
 		<link rel="stylesheet" href="assets/styles/nav.css" />
 		<link rel="stylesheet" href="assets/styles/modal.css" />
 		<link rel="stylesheet" href="assets/styles/insights.css" />
@@ -14,7 +15,7 @@
 		<script defer src="assets/scripts/modal.js"></script>
 		<script defer src="assets/scripts/requests.js"></script>
 		<script defer src="assets/scripts/insights.js"></script>
-		<title>Habitual | Insights</title>
+		<title>Insights | Habitual</title>
 	</head>
 	<body>
 		<div class="layout">
@@ -58,20 +59,22 @@
 					<span class="tooltip">Logout</span>
 				</a>
 			</div>
-			<div class="content">
-				<h1>Insights</h1>
-				<div class="habits-grid">
-					<div class="container">
-						<div class="new-habit">
-							<button id="newHabit">Create New Habit</button>
-						</div>
-						<div class="habits-container"></div>
-						<div style="text-align: center">
-							<div class="pagination"></div>
+			<div class="page">
+				<div class="content">
+					<h1>Insights</h1>
+					<div class="habits-grid">
+						<div class="container">
+							<div class="new-habit">
+								<button id="newHabit">Create New Habit</button>
+							</div>
+							<div class="habits-container"></div>
+							<div style="text-align: center">
+								<div class="pagination"></div>
+							</div>
 						</div>
 					</div>
 				</div>
-		</div>
+			</div>
 		<div id="myModal" class="modal">
 			<div class="modal-content">
 				<span class="close">&times;</span>
@@ -101,6 +104,7 @@
 					<div class="forminput">
 						<label for="start_dt">Start Date</label>
 						<input type="date" id="start_dt" name="start_date" />
+						<br>
 						<label for="end_dt">End Date</label>
 						<input type="date" id="end_dt" value="2023-12-31" name="end_date" />
 					</div>
@@ -122,7 +126,7 @@
 						</select>
 					</div>
 					<br />
-					<input type="submit" value="submit" id="submitNew" />
+					<input type="submit" value="Submit" id="submitNew" />
 				</form>
 			</div>
 		</div>
