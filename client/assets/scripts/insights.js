@@ -7,17 +7,11 @@ let groupedHabits
 let groupedHabitsByPage
 
 async function loadHabits() {
-	getAllHabits()
+	getStreaksData()
 		.then((data) => {
-			groupedHabits = {}
-			groupedHabitsByPage = {}
-
-			//group habitdates by habit id
-			groupedHabits = groupHabitsById(data)
-
-			//reduce groupedhabits to pages of 7
-			groupedHabitsByPage = organiseHabitsByPage(groupedHabits)
-
+			//reduce data to pages of 7
+			groupedHabitsByPage = organiseStreaksByPage(data)
+			console.log(groupedHabitsByPage)
 			//find out which page user is on
 			const path = window.location.href
 			let pageNum = path.split("page=")[1] ?? "1"
@@ -28,15 +22,17 @@ async function loadHabits() {
 				displayPagination(Object.values(groupedHabitsByPage).length, pageNum)
 			}
 
-			Object.entries(groupedHabitsByPage)[pageNum - 1][1].forEach((habit) => {
-				const el = createHabitElement(Object.values(habit)[0][0])
+			Object.values(groupedHabitsByPage)[pageNum - 1].forEach((habit) => {
+				const el = createHabitElement(habit)
 				habitsContainer.appendChild(el)
 			})
+			getCompleteOntime()
 		})
 		.catch((err) => {
 			if (err.status === 401) {
 				window.location.assign("login.html")
 			}
+			console.error(err)
 		})
 }
 
@@ -60,32 +56,23 @@ async function loadHabitById(id) {
 }
 
 function createHabitElement(data) {
-	const habitLink = document.createElement("a")
-	habitLink.href = `#habit${data.habit_id}`
-
 	const habit = document.createElement("div")
 	habit.className = "habit-container"
 
 	const header = document.createElement("h2")
 	header.className = "habit-name"
-	header.textContent = data.name
+	header.textContent = data.habitName
 	habit.appendChild(header)
 
-	const streakData = getStreaksData()
 	const streak = document.createElement("h3")
 	streak.className = "habit-name"
-	streak.textContent = `${streakData} streak`
+	streak.textContent = `${data.streakCount} streak`
+
 	habit.appendChild(streak)
 
-	// const note = document.createElement("p")
-	// note.className = "habit-note"
-	// note.textContent = formatNote(data.note)
-	// habit.appendChild(note)
+	habit.style.borderBottomColor = "#8758ff"
 
-	habit.style.borderBottomColor = data.colour ?? "slategrey"
-
-	habitLink.appendChild(habit)
-	return habitLink
+	return habit
 }
 
 window.addEventListener("hashchange", updateContent)
@@ -97,7 +84,6 @@ function updateContent(e) {
 	if (hash.includes("habit")) {
 		let habitNum = hash.substring(5)
 		let habit = groupedHabits[habitNum]
-		// renderMenuContent(habit[0])
 	}
 }
 
