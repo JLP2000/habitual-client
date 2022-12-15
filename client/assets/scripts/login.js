@@ -1,4 +1,5 @@
 const warning = document.getElementById("error-warning")
+const link = "https://habitual-server.onrender.com"
 
 document.getElementById("login-form").addEventListener("submit", async (e) => {
 	e.preventDefault()
@@ -16,7 +17,7 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
 			password: form.get("password"),
 		}),
 	}
-	const response = await fetch("http://localhost:3000/users/login", options)
+	const response = await fetch(`${link}/users/login`, options)
 
 	if (response.status == 200) {
 		// Read the data from the response

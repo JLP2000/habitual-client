@@ -1,4 +1,5 @@
 const warning = document.getElementById("error-warning")
+const link = "https://habitual-server.onrender.com"
 
 document
 	.getElementById("register-form")
@@ -19,10 +20,7 @@ document
 			}),
 		}
 
-		const response = await fetch(
-			"http://localhost:3000/users/register",
-			options
-		)
+		const response = await fetch(`${link}/users/register`, options)
 		if (response.status == 201) {
 			// Send the user to login.html
 			window.location.assign("login.html")

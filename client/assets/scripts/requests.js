@@ -1,3 +1,4 @@
+const link = "https://habitual-server.onrender.com"
 const allHabits = getAllHabits()
 
 async function getAllHabits() {
@@ -7,7 +8,7 @@ async function getAllHabits() {
 				Authorization: localStorage.getItem("session"),
 			},
 		}
-		const response = await fetch("http://localhost:3000/habits", options)
+		const response = await fetch(`${link}/habits`, options)
 
 		const habits = await response.json()
 
@@ -41,7 +42,7 @@ async function postNewHabit(e) {
 			},
 			body: JSON.stringify(habitObj),
 		}
-		const response = await fetch(`http://localhost:3000/habits`, options)
+		const response = await fetch(`${link}/habits`, options)
 		const { id, err } = await response.json()
 		window.location.reload()
 	} catch (err) {
@@ -59,7 +60,7 @@ async function deleteHabit(id) {
 				Authorization: localStorage.getItem("session"),
 			},
 		}
-		const response = await fetch(`http://localhost:3000/habits/${id}`, options)
+		const response = await fetch(`${link}/habits/${id}`, options)
 	} catch (err) {
 		console.warn(err)
 	}
@@ -75,10 +76,7 @@ async function updateHabit(updateData) {
 			},
 			body: JSON.stringify(updateData),
 		}
-		const response = await fetch(
-			`http://localhost:3000/habits/${updateData.id}`,
-			options
-		)
+		const response = await fetch(`${link}/habits/${updateData.id}`, options)
 	} catch (err) {
 		console.warn(err)
 	}
@@ -102,7 +100,6 @@ async function filterIncomplete() {
 	return incomplete
 }
 
-//TODO refactor to use stored data from filterIncomplete
 async function getOverdue() {
 	const incomplete = await filterIncomplete()
 	const filteredByOverdue = incomplete.filter(
@@ -138,8 +135,13 @@ async function getUpcoming(id) {
 
 async function getDatebyID(id) {
 	return new Promise(async (res, rej) => {
-		const response = await fetch(`http://localhost:3000/habitdates/${id}`)
-		res(response.date)
+		const options = {
+			method: "GET",
+		}
+		const response = await fetch(`${link}/habitdates/${id}`, options)
+		let habitdate = await response.json()
+		let date = habitdate.date
+		res(date)
 	})
 }
 
@@ -155,7 +157,6 @@ async function getOntime(id) {
 }
 
 async function updateHabitdate(updateDataEvent) {
-	// updateDataEvent.preventDefault()
 	let id = updateDataEvent.target.id
 	const thisEl = document.getElementById(`${id}`)
 	thisEl.setAttribute("checked", "checked")
@@ -173,10 +174,7 @@ async function updateHabitdate(updateDataEvent) {
 			},
 			body: JSON.stringify(req),
 		}
-		const response = await fetch(
-			`http://localhost:3000/habitdates/${id}`,
-			options
-		)
+		const response = await fetch(`${link}/habitdates/${id}`, options)
 		return response
 	} catch (err) {
 		console.warn(err)
@@ -195,7 +193,7 @@ async function GetUsername() {
 			headers: { Authorization: localStorage.getItem("session") },
 		}
 		let token = localStorage.getItem("session")
-		const response = await fetch(`http://localhost:3000/users/${token}`)
+		const response = await fetch(`${link}/users/${token}`)
 		const data = await response.json()
 
 		return data.title
@@ -216,7 +214,7 @@ async function getStreaksData() {
 					let habitDates = habit[1]
 
 					let length = habitDates.length
-					for (let i = length - 1; i > 0; i--) {
+					for (let i = length - 1; i >= 0; i--) {
 						if (
 							dayjs(habitDates[i].date).isAfter(dayjs()) ||
 							dayjs(habitDates[i].date).isSame(dayjs(), "day")
@@ -240,15 +238,19 @@ async function getStreaksData() {
 					habitDatesBefore.sort((a, b) => {
 						return dayjs(a.date).isBefore(dayjs(b.date)) ? -1 : 1
 					})
+					console.log(habitDatesBefore)
 
 					let count = 0
 					let length = habitDatesBefore.length
-					for (let i = length - 1; i > 0; i--) {
-						if (habitDatesBefore[i].on_time) count++
-						else {
+					for (let i = length - 1; i >= 0; i--) {
+						console.log(habitDatesBefore[i])
+						if (habitDatesBefore[i]["on_time"]) {
+							count++
+						} else {
 							if (dayjs(habitDatesBefore[i].date).isSame(dayjs(), "day")) {
 								//check yesterday for ongoing streak,
-								if (habitDatesBefore[i - 1].on_time) continue
+								if (i === 0) break
+								if (habitDatesBefore[i - 1]["on_time"]) continue
 							} else break
 						}
 					}
@@ -262,7 +264,6 @@ async function getStreaksData() {
 
 				//sort descending
 				streaksArr.sort((a, b) => b.streakCount - a.streakCount)
-				console.log(streaksArr)
 				res(streaksArr)
 			})
 			.catch((err) => rej(err))
