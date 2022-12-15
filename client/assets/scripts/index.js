@@ -2,7 +2,6 @@ const overdue = document.getElementById("overdue-list")
 const today = document.getElementById("today-list")
 const upcoming = document.getElementById("upcoming-list")
 const streakElement = document.querySelector("#streakNum")
-
 window.addEventListener("load", loadDate)
 window.addEventListener("load", renderUsername)
 window.addEventListener("load", renderOverdue)
@@ -12,7 +11,6 @@ window.addEventListener("load", renderUpcoming)
 async function loadDate() {
 	let today_date = new Date().toString()
 	let date = today_date.split(" ")
-	console.log(date)
 	const dateInfo = document.querySelector("#dateInfo")
 	dateInfo.textContent = `${date[0]} ${date[2]} ${date[1]} ${date[3]}`
 }
@@ -25,7 +23,11 @@ async function renderUsername() {
 }
 
 async function renderOverdue() {
-	let incomplete = await getOverdue()
+	let incomplete = await getOverdue().catch((err) => {
+		if (err.status == 401) {
+			window.location.assign("login.html")
+		}
+	})
 	incomplete.forEach((habitdate) => loadList(overdue, habitdate, true))
 }
 
@@ -37,8 +39,8 @@ async function renderToday() {
 
 		incomplete.forEach((habitdate) => loadList(today, habitdate))
 	} else {
-		document.getElementById("noHabits").style.display = "inline-block"
-		document.getElementById("bird").style.display = "inline-block"
+		document.getElementById("noHabits").style.display = "block"
+		document.getElementById("bird").style.display = "block"
 	}
 }
 
@@ -108,3 +110,8 @@ getStreaksData()
 		streakElement.textContent = data[0].streakCount
 	})
 	.catch((err) => console.warn(err))
+
+function hideOverdue() {
+	const form = document.getElementById(`form_${id}`)
+	form.style.display = "none"
+}
