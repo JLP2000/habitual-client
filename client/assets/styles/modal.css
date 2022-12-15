@@ -86,10 +86,16 @@ form * {
 }
 
 #submitNew {
+	background: linear-gradient(#0000, rgb(0 0 0/20%)) top/100% 800%;
 	background-color: var(--purple);
 	padding: 5px;
 	margin-left: 87%;
 	font-size: 18px;
+	border: none;
+}
+
+#submitNew:hover {
+	background-position: bottom;
 }
 
 .modal label {
@@ -129,6 +135,9 @@ form * {
 option[value="#708090"] {
 	color: #708090;
 }
+option[value="#8758ff"] {
+	color: var(--purple);
+}
 option[value="#79d861"] {
 	color: #79d861;
 }
@@ -138,8 +147,8 @@ option[value="#c43c5d"] {
 option[value="#ff5050"] {
 	color: #ff5050;
 }
-option[value="#42ffdd"] {
-	color: #42ffdd;
+option[value="#0470DC"] {
+	color: #0470dc;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {

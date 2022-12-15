@@ -45,11 +45,12 @@ button:hover {
 }
 
 .list {
-	border-radius: 5px;
-	border: 2px solid white;
+	/* border-radius: 5px; */
+	border-top: 2px solid white;
 	padding: 1rem 1rem 1.25rem 1rem;
-	overflow: scroll;
-	height: 8rem;
+	overflow-y: auto;
+	height: fit-content;
+	max-height: 8rem;
 }
 
 #today-list {
@@ -180,23 +181,7 @@ input[type="checkbox"] {
 	margin-bottom: 4px;
 }
 
-/* #loginInfo {
-	margin-right: -9%;
-	font-size: 1rem;
-	font-weight: bolder;
-	padding: 0.3rem 0.55rem;
+.info {
 	float: right;
-} */
-
-/* #dateInfo {
-	margin-top: 1%;
-	margin-right: -11%;
-	font-size: 1rem;
-	font-weight: bolder;
-	padding: 0.3rem 0.55rem;
-	float: right;
-} */
- .info {
-	float:right;
 	text-align: right;
- }
+}

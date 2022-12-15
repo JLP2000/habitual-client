@@ -37,8 +37,6 @@
 	font-weight: bold;
 	padding: 0.3rem 0.55rem;
 	display: block;
-	/* float: right; */
-	cursor: pointer;
 	margin-bottom: 8px;
 }
 
@@ -49,12 +47,22 @@ button {
 .habit-container {
 	background: linear-gradient(#0000, rgb(0 0 0/15%)) top/100% 800%;
 	transition: 0.5s;
+	cursor: auto;
+	border-bottom: 2px solid slategray;
+	height: 3rem;
 }
 
-.habit-container:hover {
-	background-position: bottom;
+h2,
+h3 {
+	align-self: flex-end;
+	display: inline;
+	width: 50%;
 }
-
+h3 {
+	float: right;
+	margin: 0;
+	text-align: right;
+}
 .pagination {
 	display: inline-block;
 }
@@ -77,103 +85,6 @@ button {
 	background-color: #ddd;
 	border-radius: 5px;
 }
-
-.menu {
-	border: 1px solid white;
-	border-radius: 5px;
-	padding: 2rem 2rem 0px 2rem;
-	margin: 0px 1rem;
-	top: 20px;
-	height: 80vh;
-}
-
-.menu-name,
-.menu-start,
-.menu-end,
-.menu-interval,
-.menu-note {
-	font-size: 1rem;
-}
-
-.menu-actions > button {
-	color: black;
-	display: none;
-}
-
-.menu-placeholder {
-	height: 100%;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-}
-
-.menu-placeholder > p {
-	text-align: center;
-}
-
-.menu-content {
-	position: relative;
-	height: 100%;
-	display: none;
-	flex-direction: column;
-}
-
-.menu-content > div {
-	margin: 0.5rem 0px;
-}
-
-.menu-info,
-.menu-colour {
-	display: none;
-	color: lightslategray;
-}
-
-.menu-info-show {
-	display: block;
-}
-
-.edit-name,
-.edit-note,
-.edit-colour {
-	display: none;
-	background-color: #292932;
-	border: 1px solid white;
-	border-radius: 5px;
-}
-
-#editHabit,
-#deleteHabit {
-	color: var(--white-color);
-	background-color: var(--purple);
-	border: none;
-	border-radius: 5px;
-}
-
-#updateButton {
-	position: absolute;
-	right: 0;
-	bottom: 10%;
-	display: none;
-	background-color: var(--purple);
-	border: none;
-	border-radius: 5px;
-}
-
-.deleteButtons {
-	border: none;
-}
-
-/* div:has(.menu-name) {
-	flex: 0 0 5rem;
-}
-
-div:has(.menu-note) {
-	flex: 2 0 15rem;
-}
-
-div:has(.menu-colour) {
-	flex-grow: 2;
-} */
 
 button:hover {
 	background-position: bottom;
