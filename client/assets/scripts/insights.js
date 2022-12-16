@@ -26,7 +26,6 @@ async function loadHabits() {
 				const el = createHabitElement(habit)
 				habitsContainer.appendChild(el)
 			})
-			getCompleteOntime()
 		})
 		.catch((err) => {
 			if (err.status === 401) {
