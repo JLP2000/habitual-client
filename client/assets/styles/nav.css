@@ -205,6 +205,27 @@ body {
 	padding: 1rem 2rem 1rem 0rem;
 }
 
+::-webkit-scrollbar {
+	width: 7px;
+  }
+  
+  
+  ::-webkit-scrollbar-track {
+	opacity: 0%;
+  }
+  
+  
+  ::-webkit-scrollbar-thumb {
+	background-color: #b5b5be2b;
+	opacity: 5%;
+	border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-corner {
+	display: none;
+  }
+
+
 @media (max-width: 620px) {
 	#brandname {
 		display: none;
@@ -249,5 +270,10 @@ body {
 	}
 	.layout {
 		grid-template-columns: 7rem 1fr;
+	}
+
+	.page {
+		overflow-y: auto;
+		overflow-x: hidden;
 	}
 }

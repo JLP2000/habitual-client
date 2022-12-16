@@ -48,9 +48,14 @@ button:hover {
 	/* border-radius: 5px; */
 	border-top: 2px solid white;
 	padding: 1rem 1rem 1.25rem 1rem;
-	overflow-y: auto;
 	height: fit-content;
 	max-height: 8rem;
+	overflow-y: hidden;
+	overflow-x: hidden;
+}
+
+.list:hover {
+	overflow-y: scroll
 }
 
 #today-list {

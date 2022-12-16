@@ -45,11 +45,11 @@ button {
 }
 
 .habit-container {
+	margin: 0.6rem 0px;
+	padding: 0.2rem;
+	border-bottom: 2px solid var(--purple);
 	transition: 0.5s;
-	cursor: auto;
-	border-bottom: 2px solid slategray;
 	height: 3rem;
-	border-radius: 0px;
 }
 
 h2,
