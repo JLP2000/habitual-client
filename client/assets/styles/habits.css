@@ -46,6 +46,7 @@
 
 button {
 	background: linear-gradient(#0000, rgb(0 0 0/20%)) top/100% 800%;
+	cursor: pointer;
 }
 
 .habit-container {
@@ -63,7 +64,6 @@ button {
 .habit-note {
 	font-size: 0.8rem;
 }
-
 
 .habit-container:hover {
 	background-position: bottom;
@@ -210,7 +210,7 @@ button:hover {
 	display: none;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 620px) {
 	.menu-placeholder > p {
 		font-size: 10px;
 	}
@@ -223,7 +223,7 @@ button:hover {
 		padding-left: 0px;
 	}
 
-	.habits-container{
+	.habits-container {
 		padding-right: 0px;
 		height: 190px;
 		overflow: auto;
@@ -234,6 +234,4 @@ button:hover {
 		border: none;
 		margin-bottom: 8px;
 	}
-
-	
 }

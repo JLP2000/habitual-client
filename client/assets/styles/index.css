@@ -55,7 +55,7 @@ button:hover {
 }
 
 .list:hover {
-	overflow-y: scroll
+	overflow-y: scroll;
 }
 
 #today-list {
@@ -191,4 +191,11 @@ input[type="checkbox"] {
 .info {
 	float: right;
 	text-align: right;
+}
+
+@media screen and (max-width: 620px) {
+	.streak {
+		float: none;
+		padding: 0;
+	}
 }

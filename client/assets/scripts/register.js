@@ -1,5 +1,5 @@
 const warning = document.getElementById("error-warning")
-const link = "https://habitual-server.onrender.com"
+const link = "http://localhost:3000"
 
 document
 	.getElementById("register-form")
