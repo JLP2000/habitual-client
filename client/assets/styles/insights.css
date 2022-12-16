@@ -102,3 +102,10 @@ button:hover {
 .colour-value {
 	display: none;
 }
+
+@media (max-width: 390px) {
+	h2,
+	h3 {
+		font-size: 13px;
+	}
+}

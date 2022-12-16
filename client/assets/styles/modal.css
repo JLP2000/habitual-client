@@ -96,6 +96,7 @@ form * {
 	margin-left: 87%;
 	font-size: 18px;
 	border: none;
+	cursor: pointer;
 }
 
 #submitNew:hover {
