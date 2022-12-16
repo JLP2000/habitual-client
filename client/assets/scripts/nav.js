@@ -19,7 +19,10 @@ logoutBtn.addEventListener("click", async (e) => {
 			sessionToken: localStorage.getItem("session"),
 		}),
 	}
-	const response = await fetch(`http://localhost:3000/users/logout`, options)
+	const response = await fetch(
+		`https://habitual-server.onrender.com/users/logout`,
+		options
+	)
 
 	localStorage.removeItem("session")
 	window.location.assign("login.html")

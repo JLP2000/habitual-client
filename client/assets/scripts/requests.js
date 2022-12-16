@@ -1,4 +1,4 @@
-const link = "http://localhost:3000"
+const link = "https://habitual-server.onrender.com"
 
 async function getAllHabits() {
 	return new Promise(async (res, rej) => {
