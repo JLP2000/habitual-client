@@ -8,6 +8,73 @@ window.addEventListener("load", renderOverdue)
 window.addEventListener("load", renderToday)
 window.addEventListener("load", renderUpcoming)
 
+// * data stored here
+
+let allHabitsData
+
+// * on page load
+
+getAllHabits()
+	.then((data) => {
+		allHabitsData = data
+
+		//render elements
+		renderOverdue()
+		renderToday()
+		renderUpcoming()
+	})
+	.catch((err) => {
+		console.error(err)
+		if (err.status == 401) {
+			window.location.assign("login.html")
+		}
+	})
+
+getStreaksData()
+	.then((data) => {
+		streakElement.textContent = `${data[0].habitName} (${data[0].streakCount})`
+	})
+	.catch((err) => console.warn(err))
+
+// * utilities
+
+function filterIncomplete(data) {
+	let incomplete = data.filter((habit) => habit.complete == false)
+	return incomplete
+}
+
+function getOverdue(data) {
+	const incomplete = filterIncomplete(data)
+	const filteredByOverdue = incomplete.filter(
+		(habit) => new Date(habit.date) < yesterday
+	)
+	// console.log(filteredByOverdue)
+	return filteredByOverdue
+}
+
+function getToday(data) {
+	const filteredByToday = data.filter((habit) => {
+		return new Date(habit.date).toJSON().slice(0, 10) == today_date
+	})
+	return filteredByToday
+}
+
+function getUpcoming(data) {
+	const incomplete = filterIncomplete(data)
+	const filteredByUpcoming = incomplete.filter(
+		(habit) => new Date(habit.date) > todayDate
+	)
+	const uniqueHabitID = [
+		...new Set(filteredByUpcoming.map((habit) => habit["habit_id"])),
+	]
+	const uniqueDates = uniqueHabitID.map((id) =>
+		filteredByUpcoming.find((habit) => habit.habit_id == id)
+	)
+	return uniqueDates
+}
+
+// * render
+
 async function loadDate() {
 	let today_date = new Date().toString()
 	let date = today_date.split(" ")
@@ -22,17 +89,16 @@ async function renderUsername() {
 	info.textContent = `Logged in as: ${username}`
 }
 
-async function renderOverdue() {
-	let incomplete = await getOverdue().catch((err) => {
-		if (err.status == 401) {
-			window.location.assign("login.html")
-		}
-	})
+function renderOverdue() {
+	if (!allHabitsData) return
+	let incomplete = getOverdue(allHabitsData)
+
 	incomplete.forEach((habitdate) => loadList(overdue, habitdate, true))
 }
 
-async function renderToday() {
-	let incomplete = await getToday()
+function renderToday() {
+	if (!allHabitsData) return
+	let incomplete = getToday(allHabitsData)
 	if (incomplete.length > 0) {
 		document.getElementById("noHabits").style.display = "none"
 		document.getElementById("bird").style.display = "none"
@@ -44,8 +110,9 @@ async function renderToday() {
 	}
 }
 
-async function renderUpcoming() {
-	let incomplete = await getUpcoming()
+function renderUpcoming() {
+	if (!allHabitsData) return
+	let incomplete = getUpcoming(allHabitsData)
 	incomplete.forEach((habitdate) => loadList(upcoming, habitdate, true, true))
 }
 
@@ -104,12 +171,6 @@ function loadList(list, data, showDate, disableCheckbox) {
 	svg.appendChild(polyline)
 	label.appendChild(span2)
 }
-
-getStreaksData()
-	.then((data) => {
-		streakElement.textContent = data[0].streakCount
-	})
-	.catch((err) => console.warn(err))
 
 function hideOverdue() {
 	const form = document.getElementById(`form_${id}`)

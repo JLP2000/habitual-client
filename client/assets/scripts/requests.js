@@ -1,5 +1,4 @@
 const link = "http://localhost:3000"
-const allHabits = getAllHabits()
 
 async function getAllHabits() {
 	return new Promise(async (res, rej) => {
@@ -93,45 +92,6 @@ const yesterday = new Date(todayDate)
 yesterday.setDate(yesterday.getDate() - 1)
 todayDate.toDateString()
 yesterday.toDateString()
-
-async function filterIncomplete() {
-	const allhabits = await getAllHabits()
-	let incomplete = allhabits.filter((habit) => habit.complete == false)
-	return incomplete
-}
-
-async function getOverdue() {
-	const incomplete = await filterIncomplete()
-	const filteredByOverdue = incomplete.filter(
-		(habit) => new Date(habit.date) < yesterday
-	)
-	// console.log(filteredByOverdue)
-	return filteredByOverdue
-}
-
-//TODO refactor to use stored data from filterIncomplete
-async function getToday() {
-	const allhabits = await getAllHabits()
-	const filteredByToday = allhabits.filter((habit) => {
-		return new Date(habit.date).toJSON().slice(0, 10) == today_date
-	})
-	return filteredByToday
-}
-
-//TODO refactor to use stored data from filterIncomplete
-async function getUpcoming(id) {
-	const incomplete = await filterIncomplete()
-	const filteredByUpcoming = incomplete.filter(
-		(habit) => new Date(habit.date) > todayDate
-	)
-	const uniqueHabitID = [
-		...new Set(filteredByUpcoming.map((habit) => habit["habit_id"])),
-	]
-	const uniqueDates = uniqueHabitID.map((id) =>
-		filteredByUpcoming.find((habit) => habit.habit_id == id)
-	)
-	return uniqueDates
-}
 
 async function getDatebyID(id) {
 	return new Promise(async (res, rej) => {
