@@ -56,7 +56,7 @@ For the design of Habitual, we took the user specifications and seperated them i
 
 ### Usage
 - Open register.html with a live server to run the site locally
-- Or visit our [live website](https://relaxed-speculoos-a7d774.netlify.app/client/index.html).
+- Or visit our [live website](https://relaxed-speculoos-a7d774.netlify.app/client/index.html) - deployed with Netlify.
 
 ## Technologies
 - Express: Implement our Habits API
